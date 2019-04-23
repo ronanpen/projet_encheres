@@ -10,5 +10,9 @@ public interface UtilisateurDAO {
 	
 	List<Utilisateur> selectAll() throws DALException;
 	
+	Utilisateur selectById(int id) throws DALException;
+	
 	boolean verificationConnexion(Utilisateur utilisateur) throws DALException;
+	
+	
 }

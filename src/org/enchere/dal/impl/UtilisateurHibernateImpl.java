@@ -42,4 +42,12 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		return false;
 	}
 
+	@Override
+	public Utilisateur selectById(int id) throws DALException {
+		// TODO Faire la selection par id d'utilisateur
+		return null;
+	}
+	
+	
+
 }
