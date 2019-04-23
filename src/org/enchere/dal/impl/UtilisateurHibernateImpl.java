@@ -34,8 +34,11 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 	public boolean verificationConnexion(Utilisateur utilisateur) throws DALException {
 		Session session = SessionProvider.getSession();
 		
-		Query q = session.createQuery("FROM Utilisateur WHERE nom = ");
+		Query q = session.createQuery("FROM Utilisateur WHERE pseudo = " + utilisateur.getPseudo());
 		
+		Utilisateur utilisateur_bdd = (Utilisateur) q.getSingleResult();
+		
+		if(utilisateur_bdd.getMotDePasse().equals(utilisateur.getMotDePasse())) return true;
 		return false;
 	}
 
