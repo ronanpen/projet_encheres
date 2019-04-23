@@ -9,16 +9,16 @@
 	crossorigin="anonymous">
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Connection</title>
+<title>Connexion</title>
 </head>
 <body>
-	<header> </header>
-	<nav>
-	<h1>Enchères</h1>
-	</nav>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="#">Enchères</a>
+		</nav>
+	</header>
 
-	<container>
-	<div>
+	<div class="container p-5 w-50">
 		<form action="ServletConnexion" method="post">
 			<div class="form-group">
 				<label for="identifiant">Identifiant :</label> <input type="text"
@@ -36,18 +36,18 @@
 			</div>
 			<div class="form-group form-check">
 				<input type="checkbox" class="form-check-input" id="Check1">
-				<label class="SouvenirConnexion" for="Check1">se couvenir de
+				<label class="SouvenirConnexion" for="Check1">se souvenir de
 					moi</label> <a href="###">Mot de passe oublié</a>
 			</div>
 
 
 		</form>
 		<form>
+			<!--  Pourquoi pas faire un lien plutôt (plus simple pour toi)  -->
 			<button id="creerCompte" type="submit" class="btn btn-primary">Créer un
 				compte</button>
 		</form>
 	</div>
-	</container>
 
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

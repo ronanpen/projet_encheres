@@ -33,7 +33,6 @@ public class ServletConnexion extends HttpServlet {
 	 */
 	public ServletConnexion() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
