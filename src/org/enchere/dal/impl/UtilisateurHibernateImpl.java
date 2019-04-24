@@ -15,6 +15,7 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 	private static final int NB_ROUNDS = 13;
 
 	@Override
+	// TODO changer le retour en Integer
 	public void insert(Utilisateur utilisateur) throws DALException{
 		Session session = SessionProvider.getSession();
 		
@@ -27,19 +28,16 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 	public List<Utilisateur> selectAll() throws DALException {
 		Session session = SessionProvider.getSession();
 		
+		session.beginTransaction();
 		Query q = session.createQuery("FROM Utilisateurs");
+		session.getTransaction().commit();
 		
 		return q.getResultList();
 	}
 
 	@Override
 	public Integer verificationConnexion(Utilisateur utilisateur) throws DALException {
-		Session session = SessionProvider.getSession();
-		
-		Query q = session.createQuery("FROM Utilisateurs WHERE pseudo = ?1", Utilisateur.class);
-		q.setParameter(1, utilisateur.getPseudo());
-		
-		Utilisateur utilisateur_bdd = (Utilisateur) q.getSingleResult();
+		Utilisateur utilisateur_bdd = this.selectByPseudo(utilisateur.getPseudo());
 		
 		// Vérification du hash mot de passe
 		if(BCrypt.checkpw(utilisateur.getMotDePasse(), utilisateur_bdd.getMotDePasse())) return utilisateur_bdd.getIdUtilisateur();
@@ -48,8 +46,24 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 
 	@Override
 	public Utilisateur selectById(int id) throws DALException {
-		// TODO Faire la selection par id d'utilisateur
-		return null;
+		Session session = SessionProvider.getSession();
+		session.beginTransaction();
+		Utilisateur utilisateur = session.get(Utilisateur.class, id);
+		session.getTransaction().commit();
+		
+		return utilisateur;
+	}
+
+	@Override
+	public Utilisateur selectByPseudo(String pseudo) throws DALException {
+		Session session = SessionProvider.getSession();
+		
+		session.beginTransaction();
+		Query q = session.createQuery("FROM Utilisateurs WHERE pseudo = ?1", Utilisateur.class);
+		q.setParameter(1, pseudo);
+		session.getTransaction().commit();
+		
+		return (Utilisateur) q.getSingleResult();
 	}
 	
 	
