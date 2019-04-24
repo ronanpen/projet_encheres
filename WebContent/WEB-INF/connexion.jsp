@@ -11,6 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Connexion</title>
 </head>
+
 <body>
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -31,20 +32,20 @@
 					placeholder="Mot de passe" required>
 			</div>
 			<div>
-				<button type="submit" class="btn btn-primary"
-					class="btn btn-secondary">Connexion</button>
+				<button type="submit" class="btn btn-success">Connexion</button>
 			</div>
 			
 			<div class="form-group form-check">
 				<input type="checkbox" class="form-check-input" id="Check1">
-				<label class="SouvenirConnexion" for="Check1">se souvenir de
-					moi</label> <a href="###">Mot de passe oublié</a>
+				<label class="SouvenirConnexion" for="Check1">Se souvenir de
+					moi</label> 
+				<!-- 	<a href="###">Mot de passe oublié</a> -->
 			</div>
 
 
 		</form>
 		
-		<a href = "<%=request.getContextPath()%>/connexion" >Créer un compte</a>
+		<a class="btn btn-primary" href = "<%=request.getContextPath()%>/inscription" >Créer un compte</a>
 		
 	</div>
 
