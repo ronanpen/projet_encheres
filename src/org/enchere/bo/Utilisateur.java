@@ -14,17 +14,20 @@ public class Utilisateur implements Serializable{
 	@GeneratedValue
 	@Column(name = "no_utilisateur")
 	private Integer idUtilisateur;
+	@Column(unique = true)
 	private String pseudo;
 	private String nom;
 	private String prenom;
 	private String email;
+	@Column(nullable = true)
 	private String telephone;
 	private String rue;
 	@Column(name = "code_postal")
-	private Integer codePostal;
+	private String codePostal;
 	private String ville;
 	@Column(name = "mot_de_passe")
 	private String motDePasse;
+	@Column(columnDefinition = "int default 100")
 	private int credit;
 	private boolean administrateur;
 	
@@ -36,7 +39,7 @@ public class Utilisateur implements Serializable{
 	}
 	
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			Integer codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
+			String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -51,7 +54,7 @@ public class Utilisateur implements Serializable{
 	}
 
 	public Utilisateur(Integer idUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, Integer codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
+			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
 		this.idUtilisateur = idUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -122,11 +125,11 @@ public class Utilisateur implements Serializable{
 		this.rue = rue;
 	}
 
-	public Integer getCodePostal() {
+	public String getCodePostal() {
 		return codePostal;
 	}
 
-	public void setCodePostal(Integer codePostal) {
+	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
 
@@ -160,5 +163,13 @@ public class Utilisateur implements Serializable{
 
 	public void setAdministrateur(boolean administrateur) {
 		this.administrateur = administrateur;
+	}
+
+	@Override
+	public String toString() {
+		return "Utilisateur [idUtilisateur=" + idUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
+				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
+				+ ", administrateur=" + administrateur + "]";
 	}
 }
