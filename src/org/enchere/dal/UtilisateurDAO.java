@@ -2,17 +2,17 @@ package org.enchere.dal;
 
 import java.util.List;
 
-import org.enchere.bo.Utilisateurs;
+import org.enchere.bo.Utilisateur;
 
 public interface UtilisateurDAO {
 
-	void insert(Utilisateurs utilisateur) throws DALException;
+	void insert(Utilisateur utilisateur) throws DALException;
 	
-	List<Utilisateurs> selectAll() throws DALException;
+	List<Utilisateur> selectAll() throws DALException;
 	
-	Utilisateurs selectById(int id) throws DALException;
+	Utilisateur selectById(int id) throws DALException;
 	
-	Integer verificationConnexion(Utilisateurs utilisateur) throws DALException;
+	Integer verificationConnexion(Utilisateur utilisateur) throws DALException;
 	
 	
 }

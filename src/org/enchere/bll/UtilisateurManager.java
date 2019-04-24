@@ -1,6 +1,6 @@
 package org.enchere.bll;
 
-import org.enchere.bo.Utilisateurs;
+import org.enchere.bo.Utilisateur;
 import org.enchere.dal.DALException;
 import org.enchere.dal.DAOFactory;
 import org.enchere.dal.UtilisateurDAO;
@@ -15,13 +15,13 @@ public class UtilisateurManager {
 	}
 	
 	
-	public Utilisateurs inscription(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+	public Utilisateur inscription(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			Integer codePostal, String ville, String motDePasse, String motDePasse2) {
 		// Vérification des pseudo et mot de passe renseigné par l'utilisateur
 		verificationInscription(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, motDePasse2);
 		
 		// Création d'un utilisateur avec les informations renseignées
-		Utilisateurs utilisateur = new Utilisateurs(pseudo, motDePasse);
+		Utilisateur utilisateur = new Utilisateur(pseudo, motDePasse);
 		
 		
 		return null;
@@ -41,7 +41,7 @@ public class UtilisateurManager {
 		verificationConnexion(pseudo, motDePasse);
 		
 		// Création d'un utilisateur avec les informations renseignées
-		Utilisateurs utilisateur = new Utilisateurs(pseudo, motDePasse);
+		Utilisateur utilisateur = new Utilisateur(pseudo, motDePasse);
 		
 		Integer idUtilisateur = null;
 		try {

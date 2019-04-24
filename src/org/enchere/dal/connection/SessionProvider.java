@@ -1,5 +1,6 @@
 package org.enchere.dal.connection;
 
+import org.enchere.bo.Utilisateur;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -7,10 +8,13 @@ import org.hibernate.cfg.Configuration;
 public class SessionProvider {
 	
 	private static SessionFactory sessionFactory;
+	private static Configuration configuration;
 	
 	public static synchronized Session getSession() {
 		if(sessionFactory == null) {
-			sessionFactory = new Configuration().configure().buildSessionFactory();
+			configuration = new Configuration().configure();
+			configuration.addAnnotatedClass(Utilisateur.class);
+			sessionFactory = configuration.buildSessionFactory();
 		}
 		
 		return sessionFactory.openSession();

@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import org.enchere.bo.Utilisateurs;
+import org.enchere.bo.Utilisateur;
 import org.enchere.dal.DALException;
 import org.enchere.dal.UtilisateurDAO;
 import org.enchere.dal.connection.SessionProvider;
@@ -15,7 +15,7 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 	private static final int NB_ROUNDS = 13;
 
 	@Override
-	public void insert(Utilisateurs utilisateur) throws DALException{
+	public void insert(Utilisateur utilisateur) throws DALException{
 		Session session = SessionProvider.getSession();
 		
 		session.beginTransaction();
@@ -24,7 +24,7 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public List<Utilisateurs> selectAll() throws DALException {
+	public List<Utilisateur> selectAll() throws DALException {
 		Session session = SessionProvider.getSession();
 		
 		Query q = session.createQuery("FROM Utilisateurs");
@@ -33,13 +33,13 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public Integer verificationConnexion(Utilisateurs utilisateur) throws DALException {
+	public Integer verificationConnexion(Utilisateur utilisateur) throws DALException {
 		Session session = SessionProvider.getSession();
 		
-		Query q = session.createQuery("FROM Utilisateurs WHERE pseudo = ?");
-		q.setParameter(0, utilisateur.getPseudo());
+		Query q = session.createQuery("FROM Utilisateurs WHERE pseudo = ?1", Utilisateur.class);
+		q.setParameter(1, utilisateur.getPseudo());
 		
-		Utilisateurs utilisateur_bdd = (Utilisateurs) q.getSingleResult();
+		Utilisateur utilisateur_bdd = (Utilisateur) q.getSingleResult();
 		
 		// Vérification du hash mot de passe
 		if(BCrypt.checkpw(utilisateur.getMotDePasse(), utilisateur_bdd.getMotDePasse())) return utilisateur_bdd.getIdUtilisateur();
@@ -47,7 +47,7 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public Utilisateurs selectById(int id) throws DALException {
+	public Utilisateur selectById(int id) throws DALException {
 		// TODO Faire la selection par id d'utilisateur
 		return null;
 	}

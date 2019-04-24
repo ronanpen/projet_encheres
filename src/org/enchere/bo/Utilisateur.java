@@ -1,13 +1,18 @@
 package org.enchere.bo;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
-public class Utilisateurs {
+@Entity(name = "Utilisateurs")
+public class Utilisateur implements Serializable{
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
+	@Column(name = "no_utilisateur")
 	private Integer idUtilisateur;
 	private String pseudo;
 	private String nom;
@@ -15,18 +20,22 @@ public class Utilisateurs {
 	private String email;
 	private String telephone;
 	private String rue;
+	@Column(name = "code_postal")
 	private Integer codePostal;
 	private String ville;
+	@Column(name = "mot_de_passe")
 	private String motDePasse;
 	private int credit;
 	private boolean administrateur;
 	
-	public Utilisateurs(String pseudo, String motDePasse) {
+	public Utilisateur() {}
+	
+	public Utilisateur(String pseudo, String motDePasse) {
 		this.pseudo = pseudo;
 		this.motDePasse = motDePasse;
 	}
 	
-	public Utilisateurs(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			Integer codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -41,7 +50,7 @@ public class Utilisateurs {
 		this.administrateur = administrateur;
 	}
 
-	public Utilisateurs(Integer idUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+	public Utilisateur(Integer idUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, Integer codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
 		this.idUtilisateur = idUtilisateur;
 		this.pseudo = pseudo;
