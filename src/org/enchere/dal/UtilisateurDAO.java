@@ -12,7 +12,7 @@ public interface UtilisateurDAO {
 	
 	Utilisateur selectById(int id) throws DALException;
 	
-	boolean verificationConnexion(Utilisateur utilisateur) throws DALException;
+	Utilisateur verificationConnexion(Utilisateur utilisateur) throws DALException;
 	
 	
 }
