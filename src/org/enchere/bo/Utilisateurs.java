@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Utilisateur {
+public class Utilisateurs {
 	@Id
 	@GeneratedValue
 	private Integer idUtilisateur;
@@ -21,12 +21,12 @@ public class Utilisateur {
 	private int credit;
 	private boolean administrateur;
 	
-	public Utilisateur(String pseudo, String motDePasse) {
+	public Utilisateurs(String pseudo, String motDePasse) {
 		this.pseudo = pseudo;
 		this.motDePasse = motDePasse;
 	}
 	
-	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+	public Utilisateurs(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			Integer codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -41,7 +41,7 @@ public class Utilisateur {
 		this.administrateur = administrateur;
 	}
 
-	public Utilisateur(Integer idUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+	public Utilisateurs(Integer idUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, Integer codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
 		this.idUtilisateur = idUtilisateur;
 		this.pseudo = pseudo;
