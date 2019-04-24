@@ -6,7 +6,7 @@
 	<session-factory>
 		<!-- Connection settings -->
 		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-		<property name="hibernate.connection.url">jdbc:sqlserver://10.106.200.3:1433;databaseName=projet_encheres</property>
+		<property name="hibernate.connection.url">jdbc:sqlserver://10.106.200.3:1433;databaseName=Encheres</property>
 		<property name="hibernate.connection.username">sa</property>
 		<property name="hibernate.connection.password">Pa$$w0rd</property>
 		<!-- SQL dialect -->

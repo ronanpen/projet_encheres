@@ -27,7 +27,7 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 	public List<Utilisateur> selectAll() throws DALException {
 		Session session = SessionProvider.getSession();
 		
-		Query q = session.createQuery("FROM Utilisateur");
+		Query q = session.createQuery("FROM Utilisateurs");
 		
 		return q.getResultList();
 	}
@@ -36,7 +36,8 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 	public Integer verificationConnexion(Utilisateur utilisateur) throws DALException {
 		Session session = SessionProvider.getSession();
 		
-		Query q = session.createQuery("FROM Utilisateur WHERE pseudo = " + utilisateur.getPseudo());
+		Query q = session.createQuery("FROM Utilisateurs WHERE pseudo = ?");
+		q.setParameter(0, utilisateur.getPseudo());
 		
 		Utilisateur utilisateur_bdd = (Utilisateur) q.getSingleResult();
 		

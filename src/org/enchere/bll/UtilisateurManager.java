@@ -47,7 +47,7 @@ public class UtilisateurManager {
 		try {
 			idUtilisateur = this.utilisateurDAO.verificationConnexion(utilisateur);
 		} catch (DALException e) {
-			e.printStackTrace();
+			throw new BLLException("Utilisateur ou mot de passe incorrect", e);
 		}
 		
 		// TODO Système de sauvegarde de donnée utilisateur
@@ -142,6 +142,12 @@ public class UtilisateurManager {
 			msg += "Le nom de rue doit être renseigné\n";
 			valid = false;
 		}
+		
+		/*/*/
+		///*/*/*/
+		/**
+		 *//*/
+		 */
 	}
 	
 	public static synchronized UtilisateurManager getInstance() {
