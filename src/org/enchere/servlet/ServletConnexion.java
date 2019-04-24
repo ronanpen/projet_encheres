@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.enchere.bll.BLLException;
 import org.enchere.bll.UtilisateurManager;
@@ -56,12 +57,21 @@ public class ServletConnexion extends HttpServlet {
 		String motDePasse = request.getParameter("MotDePasse");
 		boolean seSouvenirDeMoi = true;
 
+		// verifier que l'utilisateur existe
 		try {
-			if (this.utilisateurManager.connexion(pseudo, motDePasse, seSouvenirDeMoi)) {
+			Integer idUtilisateur = this.utilisateurManager.connexion(pseudo, motDePasse, seSouvenirDeMoi);
+			if (idUtilisateur != null) {
+				// si vrai => sendRedirect vers la servlet Accueil + créer la session
+				// TODO: si faux => message d'erreur;
+				// TODO: pointer vers la servlet d'accueil
 
-				// si vrai => vers liste des encheres
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
-				rd.forward(request, response);
+				HttpSession session = request.getSession();
+				session.setAttribute("idUtilisateur", idUtilisateur);
+
+				response.sendRedirect("accueil");
+
+				System.out.println("connecté");
+
 			}
 		} catch (BLLException e) {
 			e.printStackTrace();

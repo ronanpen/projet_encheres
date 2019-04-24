@@ -19,21 +19,22 @@
 	</header>
 
 	<div class="container p-5 w-50">
-		<form action="ServletConnexion" method="post">
+		<form method="post">
 			<div class="form-group">
 				<label for="identifiant">Identifiant :</label> <input type="text"
-					class="form-control" id="identifiant" aria-describedby="emailHelp"
+					class="form-control" name="identifiant" aria-describedby="emailHelp"
 					placeholder="Pseudo ou adresse email" required>
 			</div>
 			<div class="form-group">
 				<label for="MotDePasse">Mot de passe :</label> <input
-					type="password" class="form-control" id="MotDePasse"
+					type="password" class="form-control" name="MotDePasse"
 					placeholder="Mot de passe" required>
 			</div>
 			<div>
 				<button type="submit" class="btn btn-primary"
 					class="btn btn-secondary">Connexion</button>
 			</div>
+			
 			<div class="form-group form-check">
 				<input type="checkbox" class="form-check-input" id="Check1">
 				<label class="SouvenirConnexion" for="Check1">se souvenir de
@@ -42,11 +43,9 @@
 
 
 		</form>
-		<form>
-			<!--  Pourquoi pas faire un lien plutôt (plus simple pour toi)  -->
-			<button id="creerCompte" type="submit" class="btn btn-primary">Créer un
-				compte</button>
-		</form>
+		
+		<a href = "<%=request.getContextPath()%>/connexion" >Créer un compte</a>
+		
 	</div>
 
 
