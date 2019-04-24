@@ -34,17 +34,18 @@ public class UtilisateurManager {
 	 * @param motDePasse Mot de passe de l'utilisateur
 	 * @throws BLLException
 	 * @return null si aucun utilisateur trouvé ou mot de passe incorrect,<br> 
-	 * 		sinon instance d'utilisateur valorisé avec les données du système de persistance
+	 * 		sinon id utilisateur valorisé par la BDD
 	 */
-	public Utilisateur connexion(String pseudo, String motDePasse, boolean seSouvenirDeMoi) throws BLLException {		
+	public Integer connexion(String pseudo, String motDePasse, boolean seSouvenirDeMoi) throws BLLException {		
 		// Vérification des pseudo et mot de passe renseigné par l'utilisateur
 		verificationConnexion(pseudo, motDePasse);
 		
 		// Création d'un utilisateur avec les informations renseignées
 		Utilisateur utilisateur = new Utilisateur(pseudo, motDePasse);
 		
+		Integer idUtilisateur = null;
 		try {
-			utilisateur = this.utilisateurDAO.verificationConnexion(utilisateur);
+			idUtilisateur = this.utilisateurDAO.verificationConnexion(utilisateur);
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
@@ -52,7 +53,7 @@ public class UtilisateurManager {
 		// TODO Système de sauvegarde de donnée utilisateur
 		//if(seSouvenirDeMoi)
 		
-		return utilisateur;
+		return idUtilisateur;
 	}
 	
 	/**

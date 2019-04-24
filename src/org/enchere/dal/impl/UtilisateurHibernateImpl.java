@@ -33,14 +33,15 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public Utilisateur verificationConnexion(Utilisateur utilisateur) throws DALException {
+	public Integer verificationConnexion(Utilisateur utilisateur) throws DALException {
 		Session session = SessionProvider.getSession();
 		
 		Query q = session.createQuery("FROM Utilisateur WHERE pseudo = " + utilisateur.getPseudo());
 		
 		Utilisateur utilisateur_bdd = (Utilisateur) q.getSingleResult();
 		
-		if(BCrypt.checkpw(utilisateur.getMotDePasse(), utilisateur_bdd.getMotDePasse())) return utilisateur_bdd;
+		// Vérification du hash mot de passe
+		if(BCrypt.checkpw(utilisateur.getMotDePasse(), utilisateur_bdd.getMotDePasse())) return utilisateur_bdd.getIdUtilisateur();
 		return null;
 	}
 
