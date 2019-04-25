@@ -18,7 +18,7 @@ public class UtilisateurManager {
 	}
 	
 	/**
-	 * Utilisé pour modifier un utilisateur auprès du serveur
+	 * Utilisé pour modifier le profil d'un utilisateur auprès du serveur
 	 * @param idUtilisateur Id de l'utilisateur
 	 * @param pseudo Pseudo de l'utilisateur
 	 * @param nom Nom de l'utilisateur
@@ -53,7 +53,20 @@ public class UtilisateurManager {
 	}
 	
 	/**
-	 * Utilisé pour créer un utilisateur auprès du serveur
+	 * Utilisé pour supprimer le profil d'un utilisateur
+	 * @param idUtilisateur
+	 * @throws BLLException
+	 */
+	public void supprimerProfil(Integer idUtilisateur) throws BLLException {
+		try {
+			this.utilisateurDAO.delete(idUtilisateur);
+		} catch (DALException e) {
+			throw new BLLException("Impossible de supprimer l'utilisateur", e);
+		}
+	}
+	
+	/**
+	 * Utilisé pour créer un profil d'utilisateur auprès du serveur
 	 * @param pseudo Pseudo de l'utilisateur
 	 * @param nom Nom de l'utilisateur
 	 * @param prenom Prénom de l'utilisateur
@@ -158,7 +171,7 @@ public class UtilisateurManager {
 	}
 	
 	/**
-	 * Utilisé pour vérifier les informations d'un utilisateur
+	 * Utilisé pour vérifier les informations d'un profil d'utilisateur
 	 * @param pseudo Pseudo de l'utilisateur
 	 * @param nom Nom de l'utilisateur
 	 * @param prenom Prénom de l'utilisateur

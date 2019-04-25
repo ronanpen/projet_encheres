@@ -94,9 +94,6 @@
 				<button type="submit" class="btn btn-success btn-lg">Créer</button>
 				<button type="reset" class="btn btn-danger btn-lg">Annuler</button>
 			</div>
-
-
-
 		</form>
 	</div>
 

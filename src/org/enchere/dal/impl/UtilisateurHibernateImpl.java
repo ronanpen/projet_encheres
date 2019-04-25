@@ -25,14 +25,16 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 	}
 
 	@Override
+	@SuppressWarnings (value="unchecked")
 	public List<Utilisateur> selectAll() throws DALException {
 		Session session = SessionProvider.getSession();
 		
 		session.beginTransaction();
 		Query q = session.createQuery("FROM Utilisateurs");
+		List<Utilisateur> utilisateurs = (List<Utilisateur>) q.getResultList();
 		session.getTransaction().commit();
 		
-		return q.getResultList();
+		return utilisateurs;
 	}
 
 	@Override
@@ -66,9 +68,10 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		session.beginTransaction();
 		Query q = session.createQuery("FROM Utilisateurs WHERE pseudo = ?1", Utilisateur.class);
 		q.setParameter(1, pseudo);
+		Utilisateur utilisateur = (Utilisateur) q.getSingleResult();
 		session.getTransaction().commit();
 		
-		return (Utilisateur) q.getSingleResult();
+		return utilisateur;
 	}
 	
 	@Override
@@ -78,9 +81,10 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		session.beginTransaction();
 		Query q = session.createQuery("FROM Utilisateurs WHERE email = ?1", Utilisateur.class);
 		q.setParameter(1, mail);
+		Utilisateur utilisateur = (Utilisateur) q.getSingleResult();
 		session.getTransaction().commit();
 		
-		return (Utilisateur) q.getSingleResult();
+		return utilisateur;
 	}
 
 	@Override
@@ -92,6 +96,15 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		session.getTransaction().commit();
 	}
 	
-	
+	@Override
+	public void delete(Integer idUtilisateur) {
+		Session session = SessionProvider.getSession();
+		
+		session.beginTransaction();
+		Query q = session.createQuery("DELETE FROM Utilisateurs WHERE no_utilisateur = ?1");
+		q.setParameter(1, idUtilisateur);
+		q.executeUpdate();
+		session.getTransaction().commit();
+	}
 
 }

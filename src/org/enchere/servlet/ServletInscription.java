@@ -25,7 +25,6 @@ public class ServletInscription extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-
 		this.utilisateurManager = UtilisateurManager.getInstance();
 	}
 
@@ -34,7 +33,6 @@ public class ServletInscription extends HttpServlet {
 	 */
 	public ServletInscription() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
