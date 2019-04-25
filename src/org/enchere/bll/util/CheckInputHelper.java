@@ -128,7 +128,7 @@ public class CheckInputHelper {
 	 * @throws BLLException Si le numéro de téléphone n'est pas au format 
 	 */
 	public static void isPhoneNumberValid(String phoneNumber) throws BLLException{
-		String phoneNumberRegex = "[0-9]+";
+		String phoneNumberRegex = "[0-9] {10}";
 		
 		checkInputLength(phoneNumber, 10, 10, "Le numéro de téléphone doit faire 10 caractères");
 		
@@ -158,7 +158,7 @@ public class CheckInputHelper {
 		
 		checkInputLength(postalCode, 10, "Le code postal doit faire moins de 10 caractères");
 		
-		if(!Pattern.matches("[0-9]+{5}", postalCode)) throw new BLLException(ErrorCode.CODE_POSTAL_INVALIDE);
+		if(!Pattern.matches("[0-9]{5}", postalCode)) throw new BLLException(ErrorCode.CODE_POSTAL_INVALIDE);
 	}
 	
 	/**
