@@ -82,6 +82,15 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		
 		return (Utilisateur) q.getSingleResult();
 	}
+
+	@Override
+	public void update(Utilisateur utilisateur) throws DALException {
+		Session session = SessionProvider.getSession();
+		
+		session.beginTransaction();
+		session.update(utilisateur);
+		session.getTransaction().commit();
+	}
 	
 	
 

@@ -17,5 +17,5 @@ public interface UtilisateurDAO {
 	
 	Integer verificationConnexion(Utilisateur utilisateur, boolean isMail) throws DALException;
 	
-	
+	void update(Utilisateur utilisateur) throws DALException;
 }

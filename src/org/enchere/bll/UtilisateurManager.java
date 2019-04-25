@@ -17,6 +17,40 @@ public class UtilisateurManager {
 		this.utilisateurDAO = DAOFactory.getUtilisateurImpl();
 	}
 	
+	/**
+	 * Utilisé pour modifier un utilisateur auprès du serveur
+	 * @param idUtilisateur Id de l'utilisateur
+	 * @param pseudo Pseudo de l'utilisateur
+	 * @param nom Nom de l'utilisateur
+	 * @param prenom Prénom de l'utilisateur
+	 * @param email Mail de l'utilisateur
+	 * @param telephone Téléphone de l'utilisateur
+	 * @param rue Le nom de la rue de l'utilisateur
+	 * @param codePostal Le code postal de l'utilisateur
+	 * @param ville La ville de l'utilisateur
+	 * @param motDePasse Le mot de passe de l'utilisateur
+	 * @param motDePasse2 La confirmation du mot de passe de l'utilisateur
+	 * @return l'id utilisateur valorisé par le système de persistance 
+	 * 			ou null si l'opération d'ajout à échouée
+	 * @throws BLLException
+	 */
+	public void modificationProfil(Integer idUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville, String motDePasse, String motDePasse2) throws BLLException {
+		// Vérification des informations renseignées par l'utilisateur
+		verificationTotale(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, motDePasse2);
+		
+		// Création de l'utilisateur avec les informations renseignées
+		Utilisateur utilisateur = new Utilisateur(idUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+
+		// Hash du mot de passe
+		utilisateur.setMotDePasse(BCrypt.hashpw(motDePasse, BCrypt.gensalt(NB_ROUNDS)));
+				
+		try {
+			this.utilisateurDAO.update(utilisateur);
+		} catch (DALException e) {
+			throw new BLLException("Impossible de modifier l'utilisateur", e);
+		}
+	}
 	
 	/**
 	 * Utilisé pour créer un utilisateur auprès du serveur
