@@ -5,6 +5,7 @@ package org.enchere.bll;
  */
 public class BLLException extends Exception {
 	private static final long serialVersionUID = 1L;
+	private ErrorCode errorCode;
 
 	public BLLException() {
 	}
@@ -12,17 +13,17 @@ public class BLLException extends Exception {
 	public BLLException(String message) {
 		super(message);
 	}
-
-	public BLLException(Throwable cause) {
-		super(cause);
-	}
-
+	
 	public BLLException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
-	public BLLException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
+	public BLLException(ErrorCode errorCode) {
+		super(errorCode.getErrorCode() + " - " + errorCode.getMessage());
+		this.errorCode = errorCode;
 	}
-
+	
+	public ErrorCode getErrorCode() {
+		return this.errorCode;
+	}
 }

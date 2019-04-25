@@ -3,6 +3,7 @@ package org.enchere.bll.util;
 import java.util.regex.Pattern;
 
 import org.enchere.bll.BLLException;
+import org.enchere.bll.ErrorCode;
 
 public class CheckInputHelper {
 	
@@ -50,7 +51,7 @@ public class CheckInputHelper {
 	 * @throws BLLException Si les mots de passe ne sont pas identiques
 	 */
 	public static void isPasswordSame(String password, String password_2) throws BLLException{
-		if(!password.equals(password_2)) throw new BLLException("Les mots de passe ne sont pas identiques");
+		if(!password.equals(password_2)) throw new BLLException(ErrorCode.MOT_DE_PASSE_NON_IDENTIQUES);
 	}
 	
 	/**
@@ -118,7 +119,7 @@ public class CheckInputHelper {
 		checkInputLength(email, 20, "Le mail doit faire moins de 20 caractères");
 		
 		// Vérification mail valide
-		if(!Pattern.matches(emailRegex, email)) throw new BLLException("Le mail ne correspond pas au format standard");
+		if(!Pattern.matches(emailRegex, email)) throw new BLLException(ErrorCode.MAIL_INVALIDE);
 	}
 	
 	/**
@@ -132,7 +133,7 @@ public class CheckInputHelper {
 		checkInputLength(phoneNumber, 10, 10, "Le numéro de téléphone doit faire 10 caractères");
 		
 		// Vérification téléphone valide
-		if(!Pattern.matches(phoneNumberRegex, phoneNumber)) throw new BLLException("Le numéro de téléphone n'est pas au bon format (##########)");
+		if(!Pattern.matches(phoneNumberRegex, phoneNumber)) throw new BLLException(ErrorCode.NUMERO_TELEPHONE_INVALIDE);
 	}
 	
 	/**
@@ -157,7 +158,7 @@ public class CheckInputHelper {
 		
 		checkInputLength(postalCode, 10, "Le code postal doit faire moins de 10 caractères");
 		
-		if(!Pattern.matches("[0-9]+{5}", postalCode)) throw new BLLException("Le code postal n'est pas au bon format(#####)");
+		if(!Pattern.matches("[0-9]+{5}", postalCode)) throw new BLLException(ErrorCode.CODE_POSTAL_INVALIDE);
 	}
 	
 	/**
