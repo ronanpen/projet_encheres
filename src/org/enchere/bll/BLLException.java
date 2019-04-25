@@ -4,6 +4,7 @@ package org.enchere.bll;
  * @author Alexandre
  */
 public class BLLException extends Exception {
+	private static final long serialVersionUID = 1L;
 
 	public BLLException() {
 	}

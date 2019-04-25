@@ -18,7 +18,7 @@
 	<div class="container p-5">
 		<h1>Mon Profil</h1>
 		<h2>Inscription</h2>
-		<form action="accueil" method="POST">
+		<form method="POST">
 
 			<div class="form-row">
 				<div class="form-group col-md-6">

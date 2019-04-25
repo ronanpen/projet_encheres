@@ -12,16 +12,16 @@ import org.hibernate.Session;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class UtilisateurHibernateImpl implements UtilisateurDAO {
-	private static final int NB_ROUNDS = 13;
 
 	@Override
-	// TODO changer le retour en Integer
-	public void insert(Utilisateur utilisateur) throws DALException{
+	public Integer insert(Utilisateur utilisateur) throws DALException{
 		Session session = SessionProvider.getSession();
 		
 		session.beginTransaction();
 		session.save(utilisateur);
 		session.getTransaction().commit();
+		
+		return utilisateur.getIdUtilisateur();
 	}
 
 	@Override
@@ -36,8 +36,13 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public Integer verificationConnexion(Utilisateur utilisateur) throws DALException {
-		Utilisateur utilisateur_bdd = this.selectByPseudo(utilisateur.getPseudo());
+	public Integer verificationConnexion(Utilisateur utilisateur, boolean isMail) throws DALException {
+		Utilisateur utilisateur_bdd = null;
+		if(isMail) {
+			utilisateur_bdd = this.selectByMail(utilisateur.getEmail());
+		}else {
+			utilisateur_bdd = this.selectByPseudo(utilisateur.getPseudo());
+		}
 		
 		// Vérification du hash mot de passe
 		if(BCrypt.checkpw(utilisateur.getMotDePasse(), utilisateur_bdd.getMotDePasse())) return utilisateur_bdd.getIdUtilisateur();
@@ -61,6 +66,18 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		session.beginTransaction();
 		Query q = session.createQuery("FROM Utilisateurs WHERE pseudo = ?1", Utilisateur.class);
 		q.setParameter(1, pseudo);
+		session.getTransaction().commit();
+		
+		return (Utilisateur) q.getSingleResult();
+	}
+	
+	@Override
+	public Utilisateur selectByMail(String mail) throws DALException {
+		Session session = SessionProvider.getSession();
+		
+		session.beginTransaction();
+		Query q = session.createQuery("FROM Utilisateurs WHERE email = ?1", Utilisateur.class);
+		q.setParameter(1, mail);
 		session.getTransaction().commit();
 		
 		return (Utilisateur) q.getSingleResult();

@@ -5,29 +5,49 @@ import org.enchere.bo.Utilisateur;
 import org.enchere.dal.DALException;
 import org.enchere.dal.DAOFactory;
 import org.enchere.dal.UtilisateurDAO;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class UtilisateurManager {
+	private static final int NB_ROUNDS = 13;
 	private static UtilisateurManager utilisateurManager;
 	private UtilisateurDAO utilisateurDAO;
 	
 	private UtilisateurManager() {
-		// Initialisation de la factory d'utilisateur
+		// Initialisation de la dao d'utilisateur
 		this.utilisateurDAO = DAOFactory.getUtilisateurImpl();
 	}
 	
 	
+	/**
+	 * Utilisé pour créer un utilisateur auprès du serveur
+	 * @param pseudo Pseudo de l'utilisateur
+	 * @param nom Nom de l'utilisateur
+	 * @param prenom Prénom de l'utilisateur
+	 * @param email Mail de l'utilisateur
+	 * @param telephone Téléphone de l'utilisateur
+	 * @param rue Le nom de la rue de l'utilisateur
+	 * @param codePostal Le code postal de l'utilisateur
+	 * @param ville La ville de l'utilisateur
+	 * @param motDePasse Le mot de passe de l'utilisateur
+	 * @param motDePasse2 La confirmation du mot de passe de l'utilisateur
+	 * @return l'id utilisateur valorisé par le système de persistance 
+	 * 			ou null si l'opération d'ajout à échouée
+	 * @throws BLLException
+	 */
 	public Integer inscription(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse, String motDePasse2) throws BLLException {
-		// Vérification des pseudo et mot de passe renseigné par l'utilisateur
-		verificationInscription(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, motDePasse2);
+		// Vérification des informations renseignées par l'utilisateur
+		verificationTotale(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, motDePasse2);
 		
 		// Création d'un utilisateur avec les informations renseignées
-		Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, 0, false);
+		Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+		
+		// Hash du mot de passe
+		utilisateur.setMotDePasse(BCrypt.hashpw(motDePasse, BCrypt.gensalt(NB_ROUNDS)));
 		
 		Integer idUtilisateur = null;
 		try {
-			// TODO Assigner la méthode à l'id utilisateur
-			this.utilisateurDAO.insert(utilisateur);
+			idUtilisateur = this.utilisateurDAO.insert(utilisateur);
 		} catch (DALException e) {
 			throw new BLLException("Impossible d'ajouter l'utilisateur", e);
 		}
@@ -38,58 +58,73 @@ public class UtilisateurManager {
 
 	/**
 	 * Utilisé pour créer la connexion auprès du serveur
-	 * @param pseudo Pseudo de l'utilisateur
+	 * @param identifiant Identifiant de l'utilisateur (Pseudo ou mail)
 	 * @param motDePasse Mot de passe de l'utilisateur
-	 * @throws BLLException
 	 * @return null si aucun utilisateur trouvé ou mot de passe incorrect,<br> 
-	 * 		sinon id utilisateur valorisé par la BDD
+	 * 			sinon id utilisateur valorisé par le système de persistance
+	 * @throws BLLException
 	 */
-	public Integer connexion(String pseudo, String motDePasse, boolean seSouvenirDeMoi) throws BLLException {		
-		// Vérification des pseudo et mot de passe renseigné par l'utilisateur
-		verificationConnexion(pseudo, motDePasse);
+	public Integer connexion(String identifiant, String motDePasse, boolean seSouvenirDeMoi) throws BLLException {	
+		Utilisateur utilisateur = new Utilisateur();
+		boolean mail = true;
 		
-		// Création d'un utilisateur avec les informations renseignées
-		Utilisateur utilisateur = new Utilisateur(pseudo, motDePasse);
+		// Vérification si l'identifiant est un mail ou un pseudo
+		try {
+			CheckInputHelper.isMailValid(identifiant);
+		} catch(BLLException blle) {
+			mail = false;
+		}
+		
+		// Vérification des informations renseignés
+		verificationConnexion(identifiant, motDePasse, mail, utilisateur);
 		
 		Integer idUtilisateur = null;
 		try {
-			idUtilisateur = this.utilisateurDAO.verificationConnexion(utilisateur);
+			idUtilisateur = this.utilisateurDAO.verificationConnexion(utilisateur, mail);
 		} catch (DALException e) {
 			throw new BLLException("Utilisateur ou mot de passe incorrect", e);
 		}
 		
 		// TODO Système de sauvegarde de donnée utilisateur
-		//if(seSouvenirDeMoi)
+		// if(seSouvenirDeMoi)
 		
 		return idUtilisateur;
 	}
 	
 	/**
-	 * Vérifie les informations saisie lors de la connexion
-	 * @return true si les informations sont valide, false sinon
+	 * Utilisé pour vérifier les informations de connexion
+	 * @param identifiant Identiant de l'utilisateur (Pseudo ou mail)
+	 * @param motDePasse Mot de passe de l'utilisateur
+	 * @param isMail Si l'identifiant est un mail
+	 * @param utilisateur Instance d'utilisateur à valoriser
 	 */
-	private void verificationConnexion(String pseudo, String motDePasse) throws BLLException{
-		boolean valid = true;
-		String msg = "";
+	private void verificationConnexion(String identifiant, String motDePasse, boolean isMail, Utilisateur utilisateur) {
+		// Si présence de pseudo comme identifiant
+		if(!isMail) {
+			// Gestion du cas d'erreur pseudo 
+			try {
+				CheckInputHelper.isUsernameValid(identifiant);
+			} catch(BLLException blle) {
+				blle.printStackTrace();
+			}
+			
+			utilisateur.setPseudo(identifiant);
+		} else {
+			utilisateur.setEmail(identifiant);
+		}
 		
-		// Gestion du cas d'erreur pseudo null ou champ vide
-		if(pseudo == null || pseudo.equalsIgnoreCase("")) {
-			msg += "Le pseudo doit être renseigné";
-			valid = false;
-		}
-		// Gestion du cas d'erreur mot de passe null ou champ vide
-		if(motDePasse == null || motDePasse.equalsIgnoreCase("")) {
-			msg += "Le mot de passe doit être renseigné";
-			valid = false;
+		// Gestion du cas d'erreur mot de passe 
+		try {
+			CheckInputHelper.isPasswordValid(motDePasse);
+		} catch(BLLException blle) {
+			blle.printStackTrace();
 		}
 		
-		if(!valid) {
-			throw new BLLException(msg);
-		}
+		utilisateur.setMotDePasse(motDePasse);
 	}
 	
 	/**
-	 * Vérifie si les informations saisie lors de l'inscription
+	 * Utilisé pour vérifier les informations d'un utilisateur
 	 * @param pseudo Pseudo de l'utilisateur
 	 * @param nom Nom de l'utilisateur
 	 * @param prenom Prénom de l'utilisateur
@@ -100,41 +135,104 @@ public class UtilisateurManager {
 	 * @param ville Ville de l'utilisateur
 	 * @param motDePasse Mot de passe de l'utilisateur
 	 * @param motDePasse2 Confirmation du mot de passe de l'utilisateur
+	 * @throws BLLException
 	 */
-	private void verificationInscription(String pseudo, String nom, String prenom, String email, String telephone,
+	private void verificationTotale(String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, String motDePasse2) throws BLLException{
+		boolean error = false;
+		
 		// Gestion du cass d'erreur pseudo
-		CheckInputHelper.isUsernameValid(pseudo);
+		try {
+			CheckInputHelper.isUsernameValid(pseudo);
+		} catch(BLLException blle) {
+			blle.printStackTrace();
+			error = true;
+		}
+
 		
 		// Gestion du cas d'erreur nom
-		CheckInputHelper.isSurnameValid(nom);
+		try {
+			CheckInputHelper.isSurnameValid(nom);
+		} catch(BLLException blle) {
+			blle.printStackTrace();
+			error = true;
+		}
 		
 		// Gestion du cas d'erreur prenom
-		CheckInputHelper.isNameValid(prenom);
+		try {
+			CheckInputHelper.isNameValid(prenom);
+		} catch(BLLException blle) {
+			blle.printStackTrace();
+			error = true;
+		}
 		
 		// Gestion du cas d'erreur email
-		CheckInputHelper.isMailValid(email);
+		try {
+			CheckInputHelper.isMailValid(email);
+		} catch(BLLException blle) {
+			blle.printStackTrace();
+			error = true;
+		}
 		
 		// Gestion du cas d'erreur telephone
-		CheckInputHelper.isPhoneNumberValid(telephone);
+		try {
+			CheckInputHelper.isPhoneNumberValid(telephone);
+		} catch(BLLException blle) {
+			blle.printStackTrace();
+			error = true;
+		}
 		
 		// Gestion du cas d'erreur nom de rue
-		CheckInputHelper.isRoadValid(rue);
+		try {
+			CheckInputHelper.isRoadValid(rue);
+		} catch(BLLException blle) {
+			blle.printStackTrace();
+			error = true;
+		}
 		
 		// Gestion du cas d'erreur code postal
-		CheckInputHelper.isPostalCodeValid(codePostal);
+		try {
+			CheckInputHelper.isPostalCodeValid(codePostal);
+		} catch(BLLException blle) {
+			blle.printStackTrace();
+			error = true;
+		}
 		
 		// Gestion du cas d'erreur ville
-		CheckInputHelper.isTownValid(ville);
+		try {
+			CheckInputHelper.isTownValid(ville);
+		} catch(BLLException blle) {
+			blle.printStackTrace();
+			error = true;
+		}
 		
 		//Gestion du cass d'erreur mot de passe
-		CheckInputHelper.isPasswordValid(motDePasse);
+		try {
+			CheckInputHelper.isPasswordValid(motDePasse);
+		} catch(BLLException blle) {
+			blle.printStackTrace();
+			error = true;
+		}
 		
 		//Gestion du cass d'erreur mot de passe 2
-		CheckInputHelper.isPasswordValid(motDePasse2);
+		try {
+			CheckInputHelper.isPasswordValid(motDePasse2);
+		} catch(BLLException blle) {
+			blle.printStackTrace();
+			error = true;
+		}
 		
 		//Gestion du cass d'erreur mot de passe identiques
-		CheckInputHelper.isPasswordSame(motDePasse, motDePasse2);
+		try {
+			CheckInputHelper.isPasswordSame(motDePasse, motDePasse2);
+		} catch(BLLException blle) {
+			blle.printStackTrace();
+			error = true;
+		}
+		
+		if(error) {
+			throw new BLLException("Vérification des données de l'utilisateur échouée");
+		}
 	}
 	
 	public static synchronized UtilisateurManager getInstance() {
