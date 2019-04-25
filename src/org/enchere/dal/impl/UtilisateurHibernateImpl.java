@@ -20,6 +20,7 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		session.beginTransaction();
 		session.save(utilisateur);
 		session.getTransaction().commit();
+		session.close();
 		
 		return utilisateur.getIdUtilisateur();
 	}
@@ -33,6 +34,7 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		Query q = session.createQuery("FROM Utilisateurs");
 		List<Utilisateur> utilisateurs = (List<Utilisateur>) q.getResultList();
 		session.getTransaction().commit();
+		session.close();
 		
 		return utilisateurs;
 	}
@@ -57,6 +59,7 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		session.beginTransaction();
 		Utilisateur utilisateur = session.get(Utilisateur.class, id);
 		session.getTransaction().commit();
+		session.close();
 		
 		return utilisateur;
 	}
@@ -70,6 +73,7 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		q.setParameter(1, pseudo);
 		Utilisateur utilisateur = (Utilisateur) q.getSingleResult();
 		session.getTransaction().commit();
+		session.close();
 		
 		return utilisateur;
 	}
@@ -83,6 +87,7 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		q.setParameter(1, mail);
 		Utilisateur utilisateur = (Utilisateur) q.getSingleResult();
 		session.getTransaction().commit();
+		session.close();
 		
 		return utilisateur;
 	}
@@ -94,6 +99,7 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		session.beginTransaction();
 		session.update(utilisateur);
 		session.getTransaction().commit();
+		session.close();
 	}
 	
 	@Override
@@ -105,6 +111,7 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		q.setParameter(1, idUtilisateur);
 		q.executeUpdate();
 		session.getTransaction().commit();
+		session.close();
 	}
 
 }
