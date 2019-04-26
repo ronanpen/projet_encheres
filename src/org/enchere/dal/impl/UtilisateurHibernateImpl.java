@@ -52,8 +52,9 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		if(utilisateur_bdd == null) throw new DALException("L'utilisateur n'existe pas dans la base de donnée");
 		
 		// Vérification du hash mot de passe
-		if(BCrypt.checkpw(utilisateur.getMotDePasse(), utilisateur_bdd.getMotDePasse())) return utilisateur_bdd.getIdUtilisateur();
-		return null;
+		if(!BCrypt.checkpw(utilisateur.getMotDePasse(), utilisateur_bdd.getMotDePasse())) throw new DALException("Le mot de passe est incorrect");
+
+		return utilisateur_bdd.getIdUtilisateur();
 	}
 
 	@Override
