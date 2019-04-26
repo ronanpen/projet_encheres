@@ -4,15 +4,18 @@
 	
 	<p>${Idutilisateur.pseudo} est connecté</p>
 	
-<!-- 	affichage conditionnel connectÃ© vs. deconnecté -->
 		
-	
-	
-	
-	
-	
+<!-- 	à afficher si déconnecté -->
 	<a href="<%=request.getContextPath()%>/connexion">S'inscrire - Se
 		connecter</a>
-		<a href="<%=request.getContextPath()%>/deconnexion">Se
-		déconnecter</a>
+		
+	<!-- 	à afficher si connecté -->
+		<a href="<%=request.getContextPath()%>/deconnexion">Se déconnecter</a>
+		<a href="<%=request.getContextPath()%>/monProfil">Mon profil</a>
+		
+		
+		
+		
+		
+		
 </nav>

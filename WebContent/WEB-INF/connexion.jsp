@@ -40,6 +40,8 @@
 					moi</label> 
 				<!-- 	<a href="###">Mot de passe oublié</a> -->
 			</div>
+			
+			<p>${message}</p>
 
 
 		</form>
