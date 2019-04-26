@@ -205,6 +205,7 @@ public class UtilisateurManager {
 	private void verificationTotale(String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, String motDePasse2) throws BLLException{
 		boolean error = false;
+		BLLException bllex = new BLLException("Vérification des données de l'utilisateur échouée");
 		
 		// Gestion du cass d'erreur pseudo
 		try {
@@ -236,6 +237,7 @@ public class UtilisateurManager {
 			CheckInputHelper.isMailValid(email);
 		} catch(BLLException blle) {
 			blle.printStackTrace();
+			bllex.getErrorCodes().add(blle.getErrorCodes().get(0));
 			error = true;
 		}
 		
@@ -244,6 +246,7 @@ public class UtilisateurManager {
 			CheckInputHelper.isPhoneNumberValid(telephone);
 		} catch(BLLException blle) {
 			blle.printStackTrace();
+			bllex.getErrorCodes().add(blle.getErrorCodes().get(0));
 			error = true;
 		}
 		
@@ -260,6 +263,7 @@ public class UtilisateurManager {
 			CheckInputHelper.isPostalCodeValid(codePostal);
 		} catch(BLLException blle) {
 			blle.printStackTrace();
+			bllex.getErrorCodes().add(blle.getErrorCodes().get(0));
 			error = true;
 		}
 		
@@ -292,11 +296,12 @@ public class UtilisateurManager {
 			CheckInputHelper.isPasswordSame(motDePasse, motDePasse2);
 		} catch(BLLException blle) {
 			blle.printStackTrace();
+			bllex.getErrorCodes().add(blle.getErrorCodes().get(0));
 			error = true;
 		}
 		
 		if(error) {
-			throw new BLLException("Vérification des données de l'utilisateur échouée");
+			throw bllex;
 		}
 	}
 	
