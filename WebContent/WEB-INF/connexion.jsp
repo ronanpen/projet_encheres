@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,9 +15,7 @@
 
 <body>
 	<header>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand" href="#">Enchères</a>
-		</nav>
+		<%@include file="EnTete.jsp" %>
 	</header>
 
 	<div class="container p-5 w-md-50">
@@ -40,13 +38,13 @@
 				<input type="checkbox" class="form-check-input" id="Check1">
 				<label class="SouvenirConnexion" for="Check1">Se souvenir de
 					moi</label> 
-				<!-- 	<a href="###">Mot de passe oublié</a> -->
+				<!-- 	<a href="###">Mot de passe oubliÃ©</a> -->
 			</div>
 
 
 		</form>
 		
-		<a class="btn btn-primary" href = "<%=request.getContextPath()%>/inscription" >Créer un compte</a>
+		<a class="btn btn-primary" href = "<%=request.getContextPath()%>/inscription" >CrÃ©er un compte</a>
 		
 	</div>
 
@@ -62,10 +60,6 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
-
-
-
-
 
 </body>
 </html>

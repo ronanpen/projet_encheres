@@ -66,11 +66,17 @@ public class ServletInscription extends HttpServlet {
 		try {
 			Integer idUtilisateur = this.utilisateurManager.inscription(pseudo, nom, prenom, email, telephone, rue,
 					codePostal, ville, motDePasse, confirmation);
-			if(idUtilisateur != null) {
+			if (idUtilisateur != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("idUtilisateur", idUtilisateur);
 				response.sendRedirect("accueil");
 			}
+
+			HttpSession session = request.getSession();
+
+			session.setAttribute("idUtilisateur", idUtilisateur);
+
+			response.sendRedirect("accueil");
 
 		} catch (BLLException e) {
 			e.printStackTrace();

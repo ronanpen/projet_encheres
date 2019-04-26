@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,15 +12,14 @@
 <title>Inscription</title>
 </head>
 <body>
-	<header> <nav
-		class="navbar navbar-expand-lg navbar-dark bg-dark"> <a
-		class="navbar-brand" href="#">Enchères</a> </nav> </header>
+	<header> <%@include file="EnTete.jsp" %> </header>
 
 	<div class="container p-5">
 		<h1>Mon Profil</h1>
 		<h2>Inscription</h2>
-		<form method="POST">
 
+		<form method="POST">
+		
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="pseudo">Pseudo* :</label> 
@@ -38,9 +37,9 @@
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="prenom">Prénom* :</label> 
+					<label for="prenom">PrÃ©nom* :</label> 
 					<input class="form-control"
-						type="text" name="prenom" id="prenom" placeholder="votre prénom"
+						type="text" name="prenom" id="prenom" placeholder="votre prÃ©nom"
 						size="30" maxlength="30" autofocus="autofocus" required />
 				</div>
 				<div class="form-group col-md-6">
@@ -51,9 +50,9 @@
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="telephone">Téléphone :</label> <input
+					<label for="telephone">TÃ©lÃ©phone :</label> <input
 						class="form-control" type="text" name="telephone" id="telephone"
-						placeholder="votre téléphone" size="30" maxlength="15"
+						placeholder="votre tÃ©lÃ©phone" size="30" maxlength="15"
 						autofocus="autofocus" />
 				</div>
 				<div class="form-group col-md-6">
@@ -92,8 +91,10 @@
 			</div>
 
 			<div class="text-center">
-				<button type="submit" class="btn btn-success btn-lg">Créer</button>
-				<button type="reset" class="btn btn-danger btn-lg">Annuler</button>
+				<button type="submit" class="btn btn-success btn-lg">CrÃ©er</button>
+			
+			<!-- 	Bouton Annnuler renvoie vers l'accueil -->
+				<a class="btn btn-danger btn-lg" href = "<%=request.getContextPath()%>/accueil" >Annuler</a>
 			</div>
 		</form>
 	</div>
