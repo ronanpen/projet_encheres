@@ -2,13 +2,14 @@ package org.enchere.dal.impl;
 
 import java.util.List;
 
-import javax.persistence.Query;
+import javax.persistence.NoResultException;
 
 import org.enchere.bo.Utilisateur;
 import org.enchere.dal.DALException;
 import org.enchere.dal.UtilisateurDAO;
 import org.enchere.dal.connection.SessionProvider;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class UtilisateurHibernateImpl implements UtilisateurDAO {
@@ -25,14 +26,14 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		return utilisateur.getIdUtilisateur();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	@SuppressWarnings (value="unchecked")
 	public List<Utilisateur> selectAll() throws DALException {
 		Session session = SessionProvider.getSession();
 		
 		session.beginTransaction();
-		Query q = session.createQuery("FROM Utilisateurs");
-		List<Utilisateur> utilisateurs = (List<Utilisateur>) q.getResultList();
+		Query<Utilisateur> q = session.createQuery("FROM Utilisateurs");
+		List<Utilisateur> utilisateurs = q.getResultList();
 		session.getTransaction().commit();
 		session.close();
 		
@@ -58,7 +59,8 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		Session session = SessionProvider.getSession();
 		session.beginTransaction();
 		Utilisateur utilisateur = session.get(Utilisateur.class, id);
-		session.getTransaction().commit();
+		if(utilisateur == null) session.getTransaction().rollback();
+		else session.getTransaction().commit();
 		session.close();
 		
 		return utilisateur;
@@ -69,7 +71,7 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		Session session = SessionProvider.getSession();
 		
 		session.beginTransaction();
-		Query q = session.createQuery("FROM Utilisateurs WHERE pseudo = ?1", Utilisateur.class);
+		Query<Utilisateur> q = session.createQuery("FROM Utilisateurs WHERE pseudo = ?1", Utilisateur.class);
 		q.setParameter(1, pseudo);
 		Utilisateur utilisateur = (Utilisateur) q.getSingleResult();
 		session.getTransaction().commit();
@@ -83,7 +85,7 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		Session session = SessionProvider.getSession();
 		
 		session.beginTransaction();
-		Query q = session.createQuery("FROM Utilisateurs WHERE email = ?1", Utilisateur.class);
+		Query<Utilisateur> q = session.createQuery("FROM Utilisateurs WHERE email = ?1", Utilisateur.class);
 		q.setParameter(1, mail);
 		Utilisateur utilisateur = (Utilisateur) q.getSingleResult();
 		session.getTransaction().commit();
@@ -107,7 +109,7 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		Session session = SessionProvider.getSession();
 		
 		session.beginTransaction();
-		Query q = session.createQuery("DELETE FROM Utilisateurs WHERE no_utilisateur = ?1");
+		Query<?> q = session.createQuery("DELETE FROM Utilisateurs WHERE no_utilisateur = ?1");
 		q.setParameter(1, idUtilisateur);
 		q.executeUpdate();
 		session.getTransaction().commit();

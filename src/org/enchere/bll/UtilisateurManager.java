@@ -18,6 +18,24 @@ public class UtilisateurManager {
 	}
 	
 	/**
+	 * Utilisé pour récuperer le profil d'un utilisateur par son id
+	 * @param idUtilisateur Id de l'utilisateur
+	 * @return le profil de l'utilisateur avec cet id
+	 * @throws BLLException
+	 */
+	public Utilisateur recupererProfilParId(int idUtilisateur) throws BLLException{
+		Utilisateur utilisateur = null;
+		
+		try {
+			utilisateur = this.utilisateurDAO.selectById(idUtilisateur);
+		} catch(DALException dale) {
+			throw new BLLException("Impossible de récupérer le profil lié à cet id");
+		}
+		
+		return utilisateur;
+	}
+	
+	/**
 	 * Utilisé pour modifier le profil d'un utilisateur auprès du serveur
 	 * @param idUtilisateur Id de l'utilisateur
 	 * @param pseudo Pseudo de l'utilisateur

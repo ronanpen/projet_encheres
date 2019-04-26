@@ -5,13 +5,14 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name = "Utilisateurs")
 public class Utilisateur implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "no_utilisateur")
 	private Integer idUtilisateur;
 	@Column(unique = true)
@@ -19,7 +20,7 @@ public class Utilisateur implements Serializable{
 	private String nom;
 	private String prenom;
 	private String email;
-	@Column(nullable = true)
+	@Column(nullable = true) 
 	private String telephone;
 	private String rue;
 	@Column(name = "code_postal")
