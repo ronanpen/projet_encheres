@@ -23,8 +23,10 @@ public class UtilisateurManager {
 	 * @return le profil de l'utilisateur avec cet id
 	 * @throws BLLException
 	 */
-	public Utilisateur recupererProfilParId(int idUtilisateur) throws BLLException{
+	public Utilisateur recupererProfilParId(Integer idUtilisateur) throws BLLException{
 		Utilisateur utilisateur = null;
+		
+		if(idUtilisateur == null) throw new BLLException("Id de l'utilisateur incorrect");
 		
 		try {
 			utilisateur = this.utilisateurDAO.selectById(idUtilisateur);

@@ -53,7 +53,7 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		
 		// Vérification du hash mot de passe
 		if(!BCrypt.checkpw(utilisateur.getMotDePasse(), utilisateur_bdd.getMotDePasse())) throw new DALException("Le mot de passe est incorrect");
-
+ 
 		return utilisateur_bdd.getIdUtilisateur();
 	}
 
