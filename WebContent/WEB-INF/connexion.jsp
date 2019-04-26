@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -16,16 +16,21 @@
 </head>
 
 <body>
-	<header>
-		<%@include file="EnTete.jsp" %>
+	<header> <%@include file="EnTete.jsp"%>
 	</header>
 
-	<div class="container p-5 w-md-50">
+	<div class="container p-5 w-md-50 mt-5">
+
+		<c:if test="${message!= null}">
+			<div class="alert alert-danger">${message}</div>
+		</c:if>
+
 		<form method="post">
 			<div class="form-group">
 				<label for="identifiant">Identifiant :</label> <input type="text"
-					class="form-control" name="identifiant" aria-describedby="emailHelp"
-					placeholder="Pseudo ou adresse email" required>
+					class="form-control" name="identifiant"
+					aria-describedby="emailHelp" placeholder="Pseudo ou adresse email"
+					required>
 			</div>
 			<div class="form-group">
 				<label for="MotDePasse">Mot de passe :</label> <input
@@ -35,21 +40,18 @@
 			<div>
 				<button type="submit" class="btn btn-success">Connexion</button>
 			</div>
-			
+
 			<div class="form-group form-check">
 				<input type="checkbox" class="form-check-input" id="Check1">
 				<label class="SouvenirConnexion" for="Check1">Se souvenir de
-					moi</label> 
+					moi</label>
 				<!-- 	<a href="###">Mot de passe oublié</a> -->
 			</div>
-			
-			<p>${message}</p>
-
-
 		</form>
-		
-		<a class="btn btn-primary" href = "<%=request.getContextPath()%>/inscription" >Créer un compte</a>
-		
+
+		<a class="btn btn-primary"
+			href="<%=request.getContextPath()%>/inscription">Créer un compte</a>
+
 	</div>
 
 

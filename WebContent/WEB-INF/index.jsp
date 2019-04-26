@@ -18,75 +18,75 @@
 	<header> <%@include file="EnTete.jsp"%>
 
 	</header>
-	<h1>Liste des enchères</h1>
+
+	<div class="container p-3 mt-5">
+		<h1>Liste des enchères</h1>
 
 
-	<form>
+		<form>
+			<div class="form-group">
+				<label for="identifiant">Filtres :</label> <input type="text"
+					class="form-control" name="filtres"
+					placeholder="Le nom de l'article contient" />
+			</div>
+			<label class="my-1 mr-2" for="categorie">Catégorie</label> <select
+				class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+				<option selected>Toutes</option>
+				<option value="1">Trucs</option>
+				<option value="2">Machins</option>
+				<option value="3">Choses</option>
+			</select>
 
-		<div class="form-group">
-			<label for="identifiant">Filtres :</label> <input type="text"
-				class="form-control" name="filtres"
-				placeholder="Le nom de l'article contient" />
-		</div>
-		<label class="my-1 mr-2" for="categorie">Catégorie</label> <select
-			class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-			<option selected>Toutes</option>
-			<option value="1">Trucs</option>
-			<option value="2">Machins</option>
-			<option value="3">Choses</option>
-		</select>
 
-
-		<!-- 		afficher le menu uniquement si l'utilisateur est connecté
+			<!-- 		afficher le menu uniquement si l'utilisateur est connecté
  -->
-		<c:if test="${sessionScope.idUtilisateur != null}">
-		
-			<div class="form-check">
-				<input class="form-check-input" type="radio" name="choixAchatVente"
-					id="achats" value="achats" checked> <label
-					class="form-check-label" for="achats"> Achats </label>
-			</div>
-			<div class="form-check">
-				<input class="form-check-input" type="checkbox" value=""
-					id="encheresOuvertes"> <label class="form-check-label"
-					for="encheresOuvertes"> enchères ouvertes </label>
-			</div>
-			<div class="form-check">
-				<input class="form-check-input" type="checkbox" value=""
-					id="encheresEnCours"> <label class="form-check-label"
-					for="encheresEnCours"> mes enchères en cours </label>
-			</div>
-			<div class="form-check">
-				<input class="form-check-input" type="checkbox" value=""
-					id="encheresRemportées"> <label class="form-check-label"
-					for="encheresRemportées"> mes enchères remportées </label>
-			</div>
+			<c:if test="${sessionScope.idUtilisateur != null}">
 
-			<div class="form-check">
-				<input class="form-check-input" type="radio" name="choixAchatVente"
-					id="mesVentes" value="mesVentes"> <label
-					class="form-check-label" for="mesVentes"> Mes ventes </label>
-			</div>
-			<div class="form-check">
-				<input class="form-check-input" type="checkbox" value=""
-					id="ventesEnCours"> <label class="form-check-label"
-					for="ventesEnCours"> mes ventes en cours </label>
-			</div>
-			<div class="form-check">
-				<input class="form-check-input" type="checkbox" value=""
-					id="ventesNonDebutees"> <label class="form-check-label"
-					for="ventesNonDebutees">ventes non débutées </label>
-			</div>
-			<div class="form-check">
-				<input class="form-check-input" type="checkbox" value=""
-					id="ventesTerminees"> <label class="form-check-label"
-					for="ventesTerminees"> ventes terminées </label>
-			</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="choixAchatVente"
+						id="achats" value="achats" checked> <label
+						class="form-check-label" for="achats"> Achats </label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value=""
+						id="encheresOuvertes"> <label class="form-check-label"
+						for="encheresOuvertes"> enchères ouvertes </label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value=""
+						id="encheresEnCours"> <label class="form-check-label"
+						for="encheresEnCours"> mes enchères en cours </label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value=""
+						id="encheresRemportées"> <label class="form-check-label"
+						for="encheresRemportées"> mes enchères remportées </label>
+				</div>
 
-		</c:if>
-	</form>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="choixAchatVente"
+						id="mesVentes" value="mesVentes"> <label
+						class="form-check-label" for="mesVentes"> Mes ventes </label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value=""
+						id="ventesEnCours"> <label class="form-check-label"
+						for="ventesEnCours"> mes ventes en cours </label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value=""
+						id="ventesNonDebutees"> <label class="form-check-label"
+						for="ventesNonDebutees">ventes non débutées </label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" value=""
+						id="ventesTerminees"> <label class="form-check-label"
+						for="ventesTerminees"> ventes terminées </label>
+				</div>
 
-
+			</c:if>
+		</form>
+	</div>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

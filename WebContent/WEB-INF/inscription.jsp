@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -16,7 +16,7 @@
 	<header> <%@include file="EnTete.jsp"%>
 	</header>
 
-	<div class="container p-5">
+	<div class="container p-5 mt-5">
 		<h1>Mon Profil</h1>
 		<h2>Inscription</h2>
 
@@ -27,84 +27,84 @@
 		</div>
 
 
+		<div class="container p-5 w-md-50">
+			<form method="POST">
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="pseudo">Pseudo* :</label> <input class="form-control"
+							type="text" name="pseudo" id="pseudo" placeholder="votre pseudo"
+							size="30" maxlength="30" autofocus="autofocus" required />
+					</div>
+					<div class="form-group col-md-6">
+						<label for="nom">Nom* :</label> <input class="form-control"
+							type="text" name="nom" id="nom" autofocus="autofocus"
+							placeholder="votre nom" size="30" maxlength="30"
+							autofocus="autofocus" required />
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="prenom">Prénom* :</label> <input class="form-control"
+							type="text" name="prenom" id="prenom" placeholder="votre prénom"
+							size="30" maxlength="30" autofocus="autofocus" required />
+					</div>
+					<div class="form-group col-md-6">
+						<label for="email">Email* :</label> <input class="form-control"
+							type="email" name="email" id="email" placeholder="votre email"
+							size="30" maxlength="20" autofocus="autofocus" required />
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="telephone">Téléphone :</label> <input
+							class="form-control" type="text" name="telephone" id="telephone"
+							placeholder="votre téléphone" size="30" maxlength="15"
+							autofocus="autofocus" />
+					</div>
+					<div class="form-group col-md-6">
+						<label for="rue">Rue* :</label> <input class="form-control"
+							type="text" name="rue" id="rue" size="30" placeholder="votre rue"
+							size="30" maxlength="30" autofocus="autofocus" required>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="codePostal">Code postal* :</label> <input
+							class="form-control" type="text" name="codePostal"
+							id="codePostal" placeholder="votre code postal" size="30"
+							maxlength="10" autofocus="autofocus" required />
+					</div>
+					<div class="form-group col-md-6">
+						<label for="ville">Ville* :</label> <input class="form-control"
+							type="text" name="ville" id="ville" size="30"
+							placeholder="votre ville" size="30" maxlength="30"
+							autofocus="autofocus" required>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="motDePasse">Mot de passe* :</label> <input
+							class="form-control" type="password" name="motDePasse"
+							id="motDePasse" size="30" maxlength="60" autofocus="autofocus"
+							placeholder="votre mot de passe" required />
+					</div>
+					<div class="form-group col-md-6">
+						<label for="confirmation">Confirmation* :</label> <input
+							class="form-control" type="password" name="confirmation"
+							id="confirmation" size="30" maxlength="60" autofocus="autofocus"
+							placeholder="confirmez votre mot de passe" required />
+					</div>
+				</div>
 
-		<form method="POST">
+				<div class="text-center">
+					<button type="submit" class="btn btn-success btn-lg">Créer</button>
 
-			<div class="form-row">
-				<div class="form-group col-md-6">
-					<label for="pseudo">Pseudo* :</label> <input class="form-control"
-						type="text" name="pseudo" id="pseudo" placeholder="votre pseudo"
-						size="30" maxlength="30" autofocus="autofocus" required />
+					<!-- 	Bouton Annnuler renvoie vers l'accueil -->
+					<a class="btn btn-danger btn-lg"
+						href="<%=request.getContextPath()%>/accueil">Annuler</a>
 				</div>
-				<div class="form-group col-md-6">
-					<label for="nom">Nom* :</label> <input class="form-control"
-						type="text" name="nom" id="nom" autofocus="autofocus"
-						placeholder="votre nom" size="30" maxlength="30"
-						autofocus="autofocus" required />
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-md-6">
-					<label for="prenom">Prénom* :</label> <input class="form-control"
-						type="text" name="prenom" id="prenom" placeholder="votre prénom"
-						size="30" maxlength="30" autofocus="autofocus" required />
-				</div>
-				<div class="form-group col-md-6">
-					<label for="email">Email* :</label> <input class="form-control"
-						type="email" name="email" id="email" placeholder="votre email"
-						size="30" maxlength="20" autofocus="autofocus" required />
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-md-6">
-					<label for="telephone">Téléphone :</label> <input
-						class="form-control" type="text" name="telephone" id="telephone"
-						placeholder="votre téléphone" size="30" maxlength="15"
-						autofocus="autofocus" />
-				</div>
-				<div class="form-group col-md-6">
-					<label for="rue">Rue* :</label> <input class="form-control"
-						type="text" name="rue" id="rue" size="30" placeholder="votre rue"
-						size="30" maxlength="30" autofocus="autofocus" required>
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-md-6">
-					<label for="codePostal">Code postal* :</label> <input
-						class="form-control" type="text" name="codePostal" id="codePostal"
-						placeholder="votre code postal" size="30" maxlength="10"
-						autofocus="autofocus" required />
-				</div>
-				<div class="form-group col-md-6">
-					<label for="ville">Ville* :</label> <input class="form-control"
-						type="text" name="ville" id="ville" size="30"
-						placeholder="votre ville" size="30" maxlength="30"
-						autofocus="autofocus" required>
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-md-6">
-					<label for="motDePasse">Mot de passe* :</label> <input
-						class="form-control" type="password" name="motDePasse"
-						id="motDePasse" size="30" maxlength="60" autofocus="autofocus"
-						placeholder="votre mot de passe" required />
-				</div>
-				<div class="form-group col-md-6">
-					<label for="confirmation">Confirmation* :</label> <input
-						class="form-control" type="password" name="confirmation"
-						id="confirmation" size="30" maxlength="60" autofocus="autofocus"
-						placeholder="confirmez votre mot de passe" required />
-				</div>
-			</div>
-
-			<div class="text-center">
-				<button type="submit" class="btn btn-success btn-lg">Créer</button>
-
-				<!-- 	Bouton Annnuler renvoie vers l'accueil -->
-				<a class="btn btn-danger btn-lg"
-					href="<%=request.getContextPath()%>/accueil">Annuler</a>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
 
 
