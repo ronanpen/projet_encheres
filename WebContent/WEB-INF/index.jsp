@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,9 +15,8 @@
 <title>Liste des enchères</title>
 </head>
 <body>
-	<header> 
-	<%@include file="EnTete.jsp" %>
-	
+	<header> <%@include file="EnTete.jsp"%>
+
 	</header>
 	<h1>Liste des enchères</h1>
 
@@ -36,55 +35,55 @@
 			<option value="2">Machins</option>
 			<option value="3">Choses</option>
 		</select>
+
+
+		<!-- 		afficher le menu uniquement si l'utilisateur est connecté
+ -->
+		<c:if test="${sessionScope.idUtilisateur != null}">
 		
-	<h2> ${sessionScope.idUtilisateur} est connecté </h2>
-		
-<!--  TODO: a mettre en conditionnel -->
-		
-<!-- 	<input class="form-check-input" type="radio" name="choixAchatVente"
-				id="achats" value="achats" checked> <label
-				class="form-check-label" for="achats"> Achats </label>
-		</div>
-		<div class="form-check">
-			<input class="form-check-input" type="checkbox" value=""
-				id="encheresOuvertes"> <label class="form-check-label"
-				for="encheresOuvertes"> enchères ouvertes </label>
-		</div>
-		<div class="form-check">
-			<input class="form-check-input" type="checkbox" value=""
-				id="encheresEnCours"> <label class="form-check-label"
-				for="encheresEnCours"> mes enchères en cours </label>
-		</div>
-		<div class="form-check">
-			<input class="form-check-input" type="checkbox" value=""
-				id="encheresRemportées"> <label class="form-check-label"
-				for="encheresRemportées"> mes enchères remportées </label>
-		</div>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="choixAchatVente"
+					id="achats" value="achats" checked> <label
+					class="form-check-label" for="achats"> Achats </label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" value=""
+					id="encheresOuvertes"> <label class="form-check-label"
+					for="encheresOuvertes"> enchères ouvertes </label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" value=""
+					id="encheresEnCours"> <label class="form-check-label"
+					for="encheresEnCours"> mes enchères en cours </label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" value=""
+					id="encheresRemportées"> <label class="form-check-label"
+					for="encheresRemportées"> mes enchères remportées </label>
+			</div>
 
-		<div class="form-check">
-			<input class="form-check-input" type="radio" name="choixAchatVente"
-				id="mesVentes" value="mesVentes"> <label
-				class="form-check-label" for="mesVentes"> Mes ventes </label>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="choixAchatVente"
+					id="mesVentes" value="mesVentes"> <label
+					class="form-check-label" for="mesVentes"> Mes ventes </label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" value=""
+					id="ventesEnCours"> <label class="form-check-label"
+					for="ventesEnCours"> mes ventes en cours </label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" value=""
+					id="ventesNonDebutees"> <label class="form-check-label"
+					for="ventesNonDebutees">ventes non débutées </label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" value=""
+					id="ventesTerminees"> <label class="form-check-label"
+					for="ventesTerminees"> ventes terminées </label>
+			</div>
 
-		</div>
-		<div class="form-check">
-			<input class="form-check-input" type="checkbox" value=""
-				id="ventesEnCours"> <label class="form-check-label"
-				for="ventesEnCours"> mes ventes en cours </label>
-		</div>
-		<div class="form-check">
-			<input class="form-check-input" type="checkbox" value=""
-				id="ventesNonDebutees"> <label class="form-check-label"
-				for="ventesNonDebutees">ventes non débutées </label>
-		</div>
-		<div class="form-check">
-			<input class="form-check-input" type="checkbox" value=""
-				id="ventesTerminees"> <label class="form-check-label"
-				for="ventesTerminees"> ventes terminées </label>
-		</div> 
--->
-
-
+		</c:if>
 	</form>
 
 
