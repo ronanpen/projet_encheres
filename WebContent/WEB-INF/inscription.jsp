@@ -12,24 +12,31 @@
 <title>Inscription</title>
 </head>
 <body>
-	<header> <%@include file="EnTete.jsp" %> </header>
+	<header> <%@include file="EnTete.jsp"%>
+	</header>
 
 	<div class="container p-5">
 		<h1>Mon Profil</h1>
 		<h2>Inscription</h2>
 
+		<div>
+			<c:forEach items="${message}" var="error">
+				<p>${error.message}</p>
+			</c:forEach>
+		</div>
+
+
+
 		<form method="POST">
-		
+
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="pseudo">Pseudo* :</label> 
-					<input class="form-control"
+					<label for="pseudo">Pseudo* :</label> <input class="form-control"
 						type="text" name="pseudo" id="pseudo" placeholder="votre pseudo"
 						size="30" maxlength="30" autofocus="autofocus" required />
 				</div>
 				<div class="form-group col-md-6">
-					<label for="nom">Nom* :</label> 
-					<input class="form-control"
+					<label for="nom">Nom* :</label> <input class="form-control"
 						type="text" name="nom" id="nom" autofocus="autofocus"
 						placeholder="votre nom" size="30" maxlength="30"
 						autofocus="autofocus" required />
@@ -37,8 +44,7 @@
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="prenom">Prénom* :</label> 
-					<input class="form-control"
+					<label for="prenom">Prénom* :</label> <input class="form-control"
 						type="text" name="prenom" id="prenom" placeholder="votre prénom"
 						size="30" maxlength="30" autofocus="autofocus" required />
 				</div>
@@ -92,9 +98,10 @@
 
 			<div class="text-center">
 				<button type="submit" class="btn btn-success btn-lg">Créer</button>
-			
-			<!-- 	Bouton Annnuler renvoie vers l'accueil -->
-				<a class="btn btn-danger btn-lg" href = "<%=request.getContextPath()%>/accueil" >Annuler</a>
+
+				<!-- 	Bouton Annnuler renvoie vers l'accueil -->
+				<a class="btn btn-danger btn-lg"
+					href="<%=request.getContextPath()%>/accueil">Annuler</a>
 			</div>
 		</form>
 	</div>

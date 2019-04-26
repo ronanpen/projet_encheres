@@ -72,14 +72,9 @@ public class ServletInscription extends HttpServlet {
 				response.sendRedirect("accueil");
 			}
 
-			HttpSession session = request.getSession();
-
-			session.setAttribute("idUtilisateur", idUtilisateur);
-
-			response.sendRedirect("accueil");
-
 		} catch (BLLException e) {
-			e.printStackTrace();
+			request.setAttribute("message", e.getErrorCodes());
+			doGet(request, response);
 
 		}
 	}
