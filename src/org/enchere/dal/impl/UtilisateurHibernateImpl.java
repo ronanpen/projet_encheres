@@ -50,7 +50,7 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		}
 		
 		// Vérification du hash mot de passe
-		if(BCrypt.checkpw(utilisateur.getMotDePasse(), utilisateur_bdd.getMotDePasse())) return utilisateur_bdd.getIdUtilisateur();
+		if(utilisateur_bdd != null && BCrypt.checkpw(utilisateur.getMotDePasse(), utilisateur_bdd.getMotDePasse())) return utilisateur_bdd.getIdUtilisateur();
 		return null;
 	}
 
