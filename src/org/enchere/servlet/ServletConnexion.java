@@ -62,7 +62,6 @@ public class ServletConnexion extends HttpServlet {
 			Integer idUtilisateur = this.utilisateurManager.connexion(pseudo, motDePasse, seSouvenirDeMoi);
 			if (idUtilisateur != null) {
 				// si vrai => sendRedirect vers la servlet Accueil + créer la session
-				// TODO: si faux => message d'erreur;
 
 				HttpSession session = request.getSession();
 				session.setAttribute("idUtilisateur", idUtilisateur);
@@ -72,8 +71,10 @@ public class ServletConnexion extends HttpServlet {
 				System.out.println("connecté");
 
 			}
+
 		} catch (BLLException e) {
-			e.printStackTrace();
+			request.setAttribute("message", e.getMessage());
+			doGet(request, response);
 		}
 
 	}
