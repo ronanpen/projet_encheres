@@ -1,11 +1,14 @@
 package org.enchere.bll;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Alexandre
  */
 public class BLLException extends Exception {
 	private static final long serialVersionUID = 1L;
-	private ErrorCode errorCode;
+	private List<ErrorCode> errorCodes = new ArrayList<>();
 
 	public BLLException() {
 	}
@@ -20,10 +23,10 @@ public class BLLException extends Exception {
 
 	public BLLException(ErrorCode errorCode) {
 		super(errorCode.getErrorCode() + " - " + errorCode.getMessage());
-		this.errorCode = errorCode;
+		this.errorCodes.add(errorCode);
 	}
 	
-	public ErrorCode getErrorCode() {
-		return this.errorCode;
+	public List<ErrorCode> getErrorCodes() {
+		return this.errorCodes;
 	}
 }
