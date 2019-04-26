@@ -69,11 +69,14 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 	@Override
 	public Utilisateur selectByPseudo(String pseudo) throws DALException {
 		Session session = SessionProvider.getSession();
+		Utilisateur utilisateur = null;
 		
 		session.beginTransaction();
 		Query<Utilisateur> q = session.createQuery("FROM Utilisateurs WHERE pseudo = ?1", Utilisateur.class);
 		q.setParameter(1, pseudo);
-		Utilisateur utilisateur = (Utilisateur) q.getSingleResult();
+		try {
+			utilisateur = q.getSingleResult();
+		} catch(NoResultException nore) {}
 		session.getTransaction().commit();
 		session.close();
 		
@@ -83,11 +86,14 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 	@Override
 	public Utilisateur selectByMail(String mail) throws DALException {
 		Session session = SessionProvider.getSession();
+		Utilisateur utilisateur = null;
 		
 		session.beginTransaction();
 		Query<Utilisateur> q = session.createQuery("FROM Utilisateurs WHERE email = ?1", Utilisateur.class);
 		q.setParameter(1, mail);
-		Utilisateur utilisateur = (Utilisateur) q.getSingleResult();
+		try {
+			utilisateur = (Utilisateur) q.getSingleResult();
+		} catch(NoResultException nore) {}
 		session.getTransaction().commit();
 		session.close();
 		
