@@ -128,12 +128,14 @@ public class CheckInputHelper {
 	 * @throws BLLException Si le numéro de téléphone n'est pas au format 
 	 */
 	public static void isPhoneNumberValid(String phoneNumber) throws BLLException{
-		String phoneNumberRegex = "[0-9] {10}";
+		String phoneNumberRegex = "[0-9]{10}";
 		
-		checkInputLength(phoneNumber, 10, 10, "Le numéro de téléphone doit faire 10 caractères");
-		
-		// Vérification téléphone valide
-		if(!Pattern.matches(phoneNumberRegex, phoneNumber)) throw new BLLException(ErrorCode.NUMERO_TELEPHONE_INVALIDE);
+		if(phoneNumber != null) {
+			checkInputLength(phoneNumber, 10, 10, "Le numéro de téléphone doit faire 10 caractères");
+			
+			// Vérification téléphone valide
+			if(!Pattern.matches(phoneNumberRegex, phoneNumber)) throw new BLLException(ErrorCode.NUMERO_TELEPHONE_INVALIDE);
+		}
 	}
 	
 	/**

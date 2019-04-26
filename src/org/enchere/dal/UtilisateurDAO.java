@@ -23,7 +23,7 @@ public interface UtilisateurDAO {
 	/**
 	 * Utilisé pour selectionner l'utilisateur avec l'id <code>id</code> dans le système de persistance
 	 * @param id Id de l'utilisateur
-	 * @return l'utilisateur avec l'id <code>id</code>
+	 * @return l'utilisateur avec l'id <code>id</code> ou null si pas d'utilisateur trouvé
 	 * @throws DALException
 	 */
 	Utilisateur selectById(int id) throws DALException;
@@ -31,7 +31,7 @@ public interface UtilisateurDAO {
 	/**
 	 * Utilisé pour selectionner l'utilisateur avec le pseudo <code>pseudo</code> dans le système de persistance
 	 * @param pseudo Pseudo de l'utilisateur
-	 * @return l'utilisateur avec le pseudo <code>pseudo</code>
+	 * @return l'utilisateur avec le pseudo <code>pseudo</code> ou null si pas d'utilisateur trouvé
 	 * @throws DALException
 	 */
 	Utilisateur selectByPseudo(String pseudo) throws DALException;
@@ -39,7 +39,7 @@ public interface UtilisateurDAO {
 	/**
 	 * Utilisé pour selectionner l'utilisateur avec le mail <code>mail</code> dans le système de persistance
 	 * @param mail Mail de l'utilisateur
-	 * @return l'utilisateur avec le mail <code>mail</code>
+	 * @return l'utilisateur avec le mail <code>mail</code> ou null si pas d'utilisateur trouvé
 	 * @throws DALException
 	 */
 	Utilisateur selectByMail(String mail) throws DALException;
