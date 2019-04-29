@@ -92,8 +92,8 @@
 					<button type="submit" class="btn btn-success btn-lg">Enregistrer</button>
 
 					<!-- 	Bouton "Supprimer mon compte" renvoie vers l'accueil -->
-					<%-- <a class="btn btn-danger btn-lg"
-						href="<%=request.getContextPath()%>/accueil">Supprimer mon compte</a> --%>
+					 <a class="btn btn-danger btn-lg"
+						href="<%=request.getContextPath()%>/supprimerCompte">Supprimer mon compte</a>
 				</div>
 			</form>
 		</div>
