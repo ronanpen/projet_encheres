@@ -52,9 +52,10 @@
 				<td>${utilisateur.ville}</td>
 		</table>
 		<div class="text-center">
-			<button type="submit" class="btn btn-warning btn-lg">Modifier</button>
+				<a class="btn btn-warning btn-lg"
+						href="<%=request.getContextPath()%>/modification">Modifier</a>
 		</div>
-	</div>
+				</div>
 
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
