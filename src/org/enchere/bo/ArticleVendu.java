@@ -30,7 +30,7 @@ public class ArticleVendu {
 	private float miseAPrix;
 	@Column(name="prix_vente")
 	private Float prixVente;
-	@ManyToMany
+	@ManyToOne
 	@JoinColumn(name="no_utilisateur")
 	@Column(name="no_utilisateur")
 	private Utilisateur utilisateur;
