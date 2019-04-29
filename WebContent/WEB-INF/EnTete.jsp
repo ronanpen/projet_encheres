@@ -1,25 +1,26 @@
 <nav
 	class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
-	<a class="navbar-brand" href="accueil">Enchères</a>
+	<a class="navbar-brand" href="/">Enchères</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>	
 
-	
-<c:choose>
-	<c:when test="${sessionScope.idUtilisateur == null}">
-
-		<a href="<%=request.getContextPath()%>/connexion">S'inscrire - Se
-			connecter</a>
-	</c:when>
-
-	<c:otherwise>
-		<a href="<%=request.getContextPath()%>/accueil">Enchères</a>
-		<a href="<%=request.getContextPath()%>#####">Vendre un article</a>
-		<a href="<%=request.getContextPath()%>/monProfil">Mon profil</a>
-		<a href="<%=request.getContextPath()%>/deconnexion">Se déconnecter</a>
-	
-	</c:otherwise>
-</c:choose>
-
-
-
-
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<c:choose>
+				<c:when test="${sessionScope.idUtilisateur == null}">
+			
+					<li class="nav-item"><a class="nav-link pl-2 pr-2" href="<%=request.getContextPath()%>/connexion">S'inscrire - Se
+						connecter</a></li>
+				</c:when>
+			
+				<c:otherwise>
+					<li class="nav-item"><a class="nav-link pl-2 pr-2" href="<%=request.getContextPath()%>/vente">Vendre un article</a></li>
+					<li class="nav-item"><a class="nav-link pl-2 pr-2" href="<%=request.getContextPath()%>/monProfil">Mon profil</a></li>
+					<li class="nav-item"><a class="nav-link pl-2 pr-2" href="<%=request.getContextPath()%>/deconnexion">Se déconnecter</a></li>
+				
+				</c:otherwise>
+			</c:choose>
+		</ul>
+	</div>
 </nav>
