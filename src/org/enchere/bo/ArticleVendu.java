@@ -27,9 +27,9 @@ public class ArticleVendu {
 	@Column(name="date_fin_encheres")
 	private LocalDate dateFinEncheres;
 	@Column(name="prix_initial")
-	private float miseAPrix;
+	private int miseAPrix;
 	@Column(name="prix_vente")
-	private Float prixVente;
+	private Integer prixVente;
 	@ManyToOne
 	@JoinColumn(name="no_utilisateur")
 	@Column(name="no_utilisateur")
