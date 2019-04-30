@@ -35,50 +35,22 @@ public class Utilisateur implements Serializable{
 	public Utilisateur() {}
 	
 	public Utilisateur(String pseudo, String motDePasse) {
-		this.pseudo = pseudo;
-		this.motDePasse = motDePasse;
+		this(null, pseudo, null, null, null, null, null, null, null, motDePasse, 0, false);
+	}
+	
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville, String motDePasse) {
+		this(null, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, 0, false);
 	}
 	
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.telephone = telephone;
-		this.rue = rue;
-		this.codePostal = codePostal;
-		this.ville = ville;
-		this.motDePasse = motDePasse;
-		this.credit = credit;
-		this.administrateur = administrateur;
-	}
-	
-	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, String motDePasse) {
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.telephone = telephone;
-		this.rue = rue;
-		this.codePostal = codePostal;
-		this.ville = ville;
-		this.motDePasse = motDePasse;
+		this(null, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur);
 	}
 	
 	public Utilisateur(Integer idUtilisateur,String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse) {
-		this.idUtilisateur = idUtilisateur;
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.telephone = telephone;
-		this.rue = rue;
-		this.codePostal = codePostal;
-		this.ville = ville;
-		this.motDePasse = motDePasse;
+		this(idUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, 0, false);
 	}
 
 	public Utilisateur(Integer idUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
