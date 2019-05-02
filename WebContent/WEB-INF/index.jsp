@@ -40,7 +40,7 @@
 								<label class="my-1 mr-2" for="categorie">Catégorie</label> 
 							</div>
 							<div class="col-8">
-								<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+								<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="categorie">
 									<option selected>Toutes</option>
 									<option value="1">Trucs</option>
 									<option value="2">Machins</option>
