@@ -52,7 +52,7 @@
 					</div>
 					<div class="form-group">
 						<label for="descriptionArticle">Description</label>
-						<textarea class="form-control" name="nomArticle" id="descriptionArticle" maxlength="300">
+						<textarea class="form-control" name="descriptionArticle" id="descriptionArticle" maxlength="300">
 						</textarea>
 					</div>
 					<div class="form-group">
@@ -89,15 +89,15 @@
 						<legend class="scheduler-border">Retrait</legend>
 						<div class="form-group">
 							<label for="nomRue">Rue</label>
-							<input class="form-control" type="text" name="nomRue" id="nomRue" placeholder="Nom de la rue" maxlength="30">
+							<input class="form-control" type="text" name="nomRue" id="nomRue" placeholder="Nom de la rue" maxlength="30" value="${utilisateur.rue}">
 						</div>
 						<div class="form-group">
 							<label for="codePostal">Code postal</label>
-							<input class="form-control" type="number" name="codePostal" id="codePostal" placeholder="Code Postal" maxlength="5">
+							<input class="form-control" type="number" name="codePostal" id="codePostal" placeholder="Code Postal" maxlength="5" value="${utilisateur.codePostal}">
 						</div>
 						<div class="form-group">
 							<label for="ville">Ville</label>
-							<input class="form-control" type="text" name="ville" id="ville" placeholder="Ville" maxlength="30">
+							<input class="form-control" type="text" name="ville" id="ville" placeholder="Ville" maxlength="30" value="${utilisateur.ville}">
 						</div>
 					</fieldset>
 					<div class="form-group">
