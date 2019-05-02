@@ -41,7 +41,7 @@
 							</div>
 							<div class="col-8">
 								<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="categorie">
-									<option selected>Toutes</option>
+									<option selected value="0">Toutes</option>
 									<option value="1">Trucs</option>
 									<option value="2">Machins</option>
 									<option value="3">Choses</option>
