@@ -15,6 +15,7 @@ public class SessionProvider {
 		if(sessionFactory == null) {
 			configuration = new Configuration().configure();
 			configuration.addAnnotatedClass(Utilisateur.class);
+			configuration.addAnnotatedClass(Categorie.class);
 			sessionFactory = configuration.buildSessionFactory();
 		}
 		
