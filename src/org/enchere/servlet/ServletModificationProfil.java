@@ -76,7 +76,7 @@ public class ServletModificationProfil extends HttpServlet {
 			this.utilisateurManager.modificationProfil(idUtilisateur, pseudo, nom, prenom, email, telephone, rue,
 					codePostal, ville, motDePasse, confirmation);
 
-			response.sendRedirect("monProfil");
+			response.sendRedirect("profil");
 
 		} catch (BLLException e) {
 			request.setAttribute("message", e.getErrorCodes());
