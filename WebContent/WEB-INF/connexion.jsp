@@ -10,6 +10,12 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
+	<style>
+		.btn{
+		  border-radius: 40px;
+		}
+	
+	</style>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Connexion</title>
@@ -37,20 +43,27 @@
 					type="password" class="form-control" name="MotDePasse"
 					placeholder="Mot de passe" required>
 			</div>
-			<div>
-				<button type="submit" class="btn btn-success">Connexion</button>
+			<div class="d-flex mt-1 mb-1">
+				<div class="col-12">
+					<button type="submit" class="btn btn-lg btn-success w-100">Connexion</button>
+				</div>
+				
+				
+				<div class="col-12 col-md-8 d-flex align-items-center">
+					<!--<input type="checkbox" id="Check1">
+					<label class="SouvenirConnexion" for="Check1">Se souvenir de
+						moi</label>-->
+					<!-- 	<a href="###">Mot de passe oublié</a> -->
+				</div>
+			
 			</div>
-
-			<div class="form-group form-check">
-				<input type="checkbox" class="form-check-input" id="Check1">
-				<label class="SouvenirConnexion" for="Check1">Se souvenir de
-					moi</label>
-				<!-- 	<a href="###">Mot de passe oublié</a> -->
+			<hr class="d-flex justify-content-center col-8">
+			<div class="col-12">
+				<a class="btn btn-lg btn-primary w-100"
+				 	href="<%=request.getContextPath()%>/inscription">Créer un compte</a>
 			</div>
 		</form>
 
-		<a class="btn btn-primary"
-			href="<%=request.getContextPath()%>/inscription">Créer un compte</a>
 
 	</div>
 
