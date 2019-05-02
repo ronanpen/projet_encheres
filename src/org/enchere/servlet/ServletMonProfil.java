@@ -17,10 +17,9 @@ import org.enchere.bo.Utilisateur;
 /**
  * Servlet implementation class ServletMonProfile
  */
-@WebServlet("/monProfil")
+@WebServlet("/profil")
 public class ServletMonProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	private UtilisateurManager utilisateurManager;
 
 	@Override

@@ -18,17 +18,8 @@ import org.enchere.bo.Utilisateur;
  * Servlet implementation class ServletModification
  */
 @WebServlet("/modification")
-public class ServletModification extends HttpServlet {
+public class ServletModificationProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public ServletModification() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	private UtilisateurManager utilisateurManager;
 
 	@Override
@@ -56,7 +47,7 @@ public class ServletModification extends HttpServlet {
 		}
 
 		request.setAttribute("utilisateur", utilisateur);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/modification.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/modificationProfil.jsp");
 		rd.forward(request, response);
 	}
 
@@ -85,7 +76,7 @@ public class ServletModification extends HttpServlet {
 			this.utilisateurManager.modificationProfil(idUtilisateur, pseudo, nom, prenom, email, telephone, rue,
 					codePostal, ville, motDePasse, confirmation);
 
-			response.sendRedirect("modification");
+			response.sendRedirect("monProfil");
 
 		} catch (BLLException e) {
 			request.setAttribute("message", e.getErrorCodes());

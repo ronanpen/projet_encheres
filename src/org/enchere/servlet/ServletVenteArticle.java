@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.enchere.bll.ArticleManager;
 import org.enchere.bll.BLLException;
 import org.enchere.bll.UtilisateurManager;
+import org.enchere.bo.ArticleVendu;
 import org.enchere.bo.Utilisateur;
 
 /**
@@ -22,7 +24,7 @@ import org.enchere.bo.Utilisateur;
 public class ServletVenteArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static UtilisateurManager utilisateurManager;
-	//private static ArticleManager articleManager = ArticleManager.getInstance();
+	private static ArticleManager articleManager = ArticleManager.getInstance();
 	
 	@Override
 	public void init() throws ServletException {
@@ -46,8 +48,22 @@ public class ServletVenteArticle extends HttpServlet {
 		
 		request.setAttribute("utilisateur", utilisateur);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/venteArticle.jsp");
-		rd.forward(request, response);
+		String idArticle = request.getParameter("id");
+		if(idArticle != null) {
+			int id = Integer.parseInt(idArticle);
+			ArticleVendu article = null;
+			try {
+				article = this.articleManager.recupererArticleParId(id);
+			} catch (BLLException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("article", article);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/afficherArticle.jsp");
+			rd.forward(request, response);
+		} else {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/venteArticle.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	/**
@@ -63,18 +79,18 @@ public class ServletVenteArticle extends HttpServlet {
 		String nomRue = request.getParameter("nomRue");
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
-		
-		
-		
+
+		Integer idArticle = 1;
 		/*try {
-			articleManager.ajouterArticle(nomArticle, description, 
+			idArticle = articleManager.ajouterArticle(nomArticle, description, 
 					idCategorie, prixDepart, dateDebutEnchere, 
 					dateFinEnchere, nomRue, codePostal, ville);
+			idArticle = 1;
 		} catch(BLLException blle) {
 			blle.printStackTrace();
 		}*/
 		
-		doGet(request, response);
+		response.sendRedirect("vente?id=" + idArticle);
 	}
 
 }
