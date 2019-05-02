@@ -20,72 +20,167 @@
 	</header>
 
 	<div class="container p-3 mt-5">
-		<h1>Liste des enchères</h1>
-
-
-		<form>
-			<div class="form-group">
-				<label for="identifiant">Filtres :</label> <input type="text"
-					class="form-control" name="filtres"
-					placeholder="Le nom de l'article contient" />
+		<div class="text-center">
+			<h1>Liste des enchères</h1>
+		</div>
+		<form class="row">
+			<div class="col-12 col-lg-6">
+				<label>Filtres :</label>
+				<div class="row w-100">
+					<div class="col-12 order-3 order-md-1">
+						<div class="form-group">
+							<input type="text"
+								class="form-control" name="filtres"
+								placeholder="Le nom de l'article contient" />
+						</div>
+					</div>
+					<div class="col-12 order-2 order-md-2">
+						<div class="row">
+							<div class="col-4">
+								<label class="my-1 mr-2" for="categorie">Catégorie</label> 
+							</div>
+							<div class="col-8">
+								<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+									<option selected>Toutes</option>
+									<option value="1">Trucs</option>
+									<option value="2">Machins</option>
+									<option value="3">Choses</option>
+								</select>
+							</div>
+						</div>
+					</div>
+		
+		
+					<!-- 		afficher le menu uniquement si l'utilisateur est connecté
+		 -->
+		 			<div class="col-12 order-1 order-md-3">
+						<c:if test="${sessionScope.idUtilisateur != null}">
+							<div class="row">
+								<div class="col-12 col-md-6">
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="choixAchatVente"
+											id="achats" value="achats" checked> <label
+											class="form-check-label" for="achats"> Achats </label>
+									</div>
+									<div class="pl-4">
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value=""
+												id="encheresOuvertes"> <label class="form-check-label"
+												for="encheresOuvertes"> enchères ouvertes </label>
+										</div>
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value=""
+												id="encheresEnCours"> <label class="form-check-label"
+												for="encheresEnCours"> mes enchères en cours </label>
+										</div>
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value=""
+												id="encheresRemportées"> <label class="form-check-label"
+												for="encheresRemportées"> mes enchères remportées </label>
+										</div>
+									</div>
+								</div>
+								<div class="col-12 col-md-6">
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="choixAchatVente"
+											id="mesVentes" value="mesVentes"> <label
+											class="form-check-label" for="mesVentes"> Mes ventes </label>
+									</div>
+									<div class="pl-4">
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value=""
+												id="ventesEnCours"> <label class="form-check-label"
+												for="ventesEnCours"> mes ventes en cours </label>
+										</div>
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value=""
+												id="ventesNonDebutees"> <label class="form-check-label"
+												for="ventesNonDebutees">ventes non débutées </label>
+										</div>
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value=""
+												id="ventesTerminees"> <label class="form-check-label"
+												for="ventesTerminees"> ventes terminées </label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</c:if>
+					</div>
+				</div>
 			</div>
-			<label class="my-1 mr-2" for="categorie">Catégorie</label> <select
-				class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-				<option selected>Toutes</option>
-				<option value="1">Trucs</option>
-				<option value="2">Machins</option>
-				<option value="3">Choses</option>
-			</select>
-
-
-			<!-- 		afficher le menu uniquement si l'utilisateur est connecté
- -->
-			<c:if test="${sessionScope.idUtilisateur != null}">
-
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="choixAchatVente"
-						id="achats" value="achats" checked> <label
-						class="form-check-label" for="achats"> Achats </label>
-				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" value=""
-						id="encheresOuvertes"> <label class="form-check-label"
-						for="encheresOuvertes"> enchères ouvertes </label>
-				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" value=""
-						id="encheresEnCours"> <label class="form-check-label"
-						for="encheresEnCours"> mes enchères en cours </label>
-				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" value=""
-						id="encheresRemportées"> <label class="form-check-label"
-						for="encheresRemportées"> mes enchères remportées </label>
-				</div>
-
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="choixAchatVente"
-						id="mesVentes" value="mesVentes"> <label
-						class="form-check-label" for="mesVentes"> Mes ventes </label>
-				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" value=""
-						id="ventesEnCours"> <label class="form-check-label"
-						for="ventesEnCours"> mes ventes en cours </label>
-				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" value=""
-						id="ventesNonDebutees"> <label class="form-check-label"
-						for="ventesNonDebutees">ventes non débutées </label>
-				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" value=""
-						id="ventesTerminees"> <label class="form-check-label"
-						for="ventesTerminees"> ventes terminées </label>
-				</div>
-
-			</c:if>
+			<div class="col-12 col-lg-6 d-flex align-items-center justify-content-center p-5">
+				<button class="btn btn-success btn-lg w-100 h-100" type="submit"><div class="display-4">Rechercher</div></button> 
+			</div>
 		</form>
+		<div class="row">
+			<div class="col-12 col-md-6 mt-3">
+				<div class="card bg-info text-white">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-4">
+								<img class="img-fluid" 
+								src="https://media.flixcar.com/f360cdn/Samsung-1918702440-fr-washer-ww70j5556-ww70j5556fx-ef-dynamicmineralashblack-61600115-zoom.png" 
+								alt="Image de l'article">
+							</div>
+							<div class="col-8">
+								<h5 class="card-title"><a class="card-link text-white" href="#">PC Gamer pour travailler</a></h5>
+								<p>Prix: 210 points</p>
+								<p>Fin de l'enchère: 10/08/2018</p>
+								<p class="card-text">
+								<c:choose>
+									<c:when test="${sessionScope.idUtilisateur != null}">
+										<a href="#"><small class="text-muted">jojo44</small></a>
+									</c:when>
+									<c:otherwise>
+										<small class="text-muted">jojo44</small>
+									</c:otherwise>
+								</c:choose>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-12 col-md-6 mt-3">
+				<div class="card bg-info text-white">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-4">
+								<img class="img-fluid" 
+								src="https://media.flixcar.com/f360cdn/Samsung-1918702440-fr-washer-ww70j5556-ww70j5556fx-ef-dynamicmineralashblack-61600115-zoom.png" 
+								alt="Image de l'article">
+							</div>
+							<div class="col-8">
+								<h5 class="card-title"><a class="card-link text-white" href="#">PC Gamer pour travailler</a></h5>
+								<p>Prix: 210 points</p>
+								<p>Fin de l'enchère: 10/08/2018</p>
+								<p class="card-text"><a href="#"><small class="text-muted">jojo44</small></a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-12 col-md-6 mt-3">
+				<div class="card bg-info text-white">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-4">
+								<img class="img-fluid" 
+								src="https://media.flixcar.com/f360cdn/Samsung-1918702440-fr-washer-ww70j5556-ww70j5556fx-ef-dynamicmineralashblack-61600115-zoom.png" 
+								alt="Image de l'article">
+							</div>
+							<div class="col-8">
+								<h5 class="card-title"><a class="card-link text-white" href="#">PC Gamer pour travailler</a></h5>
+								<p>Prix: 210 points</p>
+								<p>Fin de l'enchère: 10/08/2018</p>
+								<p class="card-text"><a href="#"><small class="text-muted">jojo44</small></a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
