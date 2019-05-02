@@ -19,7 +19,7 @@
 	<header> <%@include file="EnTete.jsp"%>
 	</header>
 
-	<div class="container p-5 w-md-50 mt-5">
+	<div class="container p-5 mt-5">
 
 		<c:if test="${message!= null}">
 			<div class="alert alert-danger">${message}</div>
