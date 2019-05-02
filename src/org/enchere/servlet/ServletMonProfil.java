@@ -15,7 +15,7 @@ import org.enchere.bll.UtilisateurManager;
 import org.enchere.bo.Utilisateur;
 
 /**
- * Servlet implementation class ServletMonProfile
+ * Servlet implementation class ServletMonProfil
  */
 @WebServlet("/profil")
 public class ServletMonProfil extends HttpServlet {

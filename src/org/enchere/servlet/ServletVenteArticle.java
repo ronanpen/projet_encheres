@@ -23,13 +23,14 @@ import org.enchere.bo.Utilisateur;
 @WebServlet("/vente")
 public class ServletVenteArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static UtilisateurManager utilisateurManager;
-	private static ArticleManager articleManager = ArticleManager.getInstance();
+	private UtilisateurManager utilisateurManager;
+	private ArticleManager articleManager;
 	
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		utilisateurManager = UtilisateurManager.getInstance();
+		this.utilisateurManager = UtilisateurManager.getInstance();
+		this.articleManager = ArticleManager.getInstance();
 	}
 
 	/**
