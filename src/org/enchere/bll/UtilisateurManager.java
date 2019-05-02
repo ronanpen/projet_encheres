@@ -164,16 +164,13 @@ public class UtilisateurManager {
 	 * @param motDePasse Mot de passe de l'utilisateur
 	 * @param isMail Si l'identifiant est un mail
 	 * @param utilisateur Instance d'utilisateur à valoriser
+	 * @throws BLLException 
 	 */
-	private void verificationConnexion(String identifiant, String motDePasse, boolean isMail, Utilisateur utilisateur) {
+	private void verificationConnexion(String identifiant, String motDePasse, boolean isMail, Utilisateur utilisateur) throws BLLException {
 		// Si présence de pseudo comme identifiant
 		if(!isMail) {
 			// Gestion du cas d'erreur pseudo 
-			try {
-				CheckInputHelper.isUsernameValid(identifiant);
-			} catch(BLLException blle) {
-				blle.printStackTrace();
-			}
+			CheckInputHelper.isUsernameValid(identifiant);
 			
 			utilisateur.setPseudo(identifiant);
 		} else {
@@ -181,11 +178,7 @@ public class UtilisateurManager {
 		}
 		
 		// Gestion du cas d'erreur mot de passe 
-		try {
-			CheckInputHelper.isPasswordValid(motDePasse);
-		} catch(BLLException blle) {
-			blle.printStackTrace();
-		}
+		CheckInputHelper.isPasswordValid(motDePasse);
 		
 		utilisateur.setMotDePasse(motDePasse);
 	}
