@@ -24,7 +24,7 @@
 						  <i class="far fa-user"></i>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-						  <a class="dropdown-item" href="<%=request.getContextPath()%>/monProfil">Mon Profil</a>
+						  <a class="dropdown-item" href="<%=request.getContextPath()%>/profil">Mon Profil</a>
 						  <div class="dropdown-divider"></div>
 						  <a class="dropdown-item" href="<%=request.getContextPath()%>/deconnexion">Déconnexion</a>
 						</div>
