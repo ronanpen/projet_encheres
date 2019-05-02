@@ -2,6 +2,7 @@ package org.enchere.servlet;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,9 +14,12 @@ import javax.servlet.http.HttpSession;
 
 import org.enchere.bll.ArticleManager;
 import org.enchere.bll.BLLException;
+import org.enchere.bll.CategorieManager;
 import org.enchere.bll.UtilisateurManager;
 import org.enchere.bo.ArticleVendu;
+import org.enchere.bo.Categorie;
 import org.enchere.bo.Utilisateur;
+import org.enchere.dal.DALException;
 
 /**
  * Servlet implementation class ServletVenteArticle
@@ -25,12 +29,14 @@ public class ServletVenteArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UtilisateurManager utilisateurManager;
 	private ArticleManager articleManager;
+	private CategorieManager categorieManager;
 	
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		this.utilisateurManager = UtilisateurManager.getInstance();
 		this.articleManager = ArticleManager.getInstance();
+		this.categorieManager = CategorieManager.getInstance();
 	}
 
 	/**
@@ -62,6 +68,15 @@ public class ServletVenteArticle extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/afficherArticle.jsp");
 			rd.forward(request, response);
 		} else {
+			List<Categorie> categories = null;
+			try {
+				categories = this.categorieManager.recupererCategories();
+			} catch(BLLException blle) {
+				blle.printStackTrace();
+			}
+			
+			request.setAttribute("categories", categories);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/venteArticle.jsp");
 			rd.forward(request, response);
 		}
@@ -73,10 +88,10 @@ public class ServletVenteArticle extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nomArticle = request.getParameter("nomArticle");
 		String description = request.getParameter("descriptionArticle");
-		int idCategorie = Integer.parseInt(request.getParameter("categorieArticle"));
-		int prixDepart = Integer.parseInt(request.getParameter("prixDepart"));
-		LocalDate dateDebutEnchere = LocalDate.parse(request.getParameter("debutEnchere"));
-		LocalDate dateFinEnchere = LocalDate.parse(request.getParameter("finEnchere"));
+		String idCategorie = request.getParameter("categorieArticle");
+		String prixDepart = request.getParameter("prixDepart");
+		String dateDebutEnchere = request.getParameter("debutEnchere");
+		String dateFinEnchere = request.getParameter("finEnchere");
 		String nomRue = request.getParameter("nomRue");
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");

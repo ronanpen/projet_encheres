@@ -26,13 +26,12 @@ public class UtilisateurHibernateImpl implements UtilisateurDAO {
 		return utilisateur.getIdUtilisateur();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Utilisateur> selectAll() throws DALException {
 		Session session = SessionProvider.getSession();
 		
 		session.beginTransaction();
-		Query<Utilisateur> q = session.createQuery("FROM Utilisateurs");
+		Query<Utilisateur> q = session.createQuery("FROM Utilisateurs", Utilisateur.class);
 		List<Utilisateur> utilisateurs = q.getResultList();
 		session.getTransaction().commit();
 		session.close();

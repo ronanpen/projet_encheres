@@ -47,13 +47,21 @@ public class Categorie implements Serializable {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
+	
+	public Categorie() {}
 
+	/**
+	 * @param libelle
+	 */
+	public Categorie(String libelle) {
+		this.libelle = libelle;
+	}
+	
 	/**
 	 * @param idCategorie
 	 * @param libelle
 	 */
 	public Categorie(Integer idCategorie, String libelle) {
-		super();
 		this.idCategorie = idCategorie;
 		this.libelle = libelle;
 	}

@@ -58,7 +58,7 @@
 					<div class="form-group">
 						<label for="categorieArticle">Catégorie</label>
 						<select class="form-control" name="categorieArticle" id="categorieArticle">
-							<c:forEach items="${categorieArticle}" var="categorie">
+							<c:forEach items="${categories}" var="categorie">
 								<option value="${categorie.idCategorie}">${categorie.libelle}</option>
 							</c:forEach>
 						</select>

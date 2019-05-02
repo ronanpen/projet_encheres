@@ -1,5 +1,6 @@
 package org.enchere.dal.connection;
 
+import org.enchere.bo.Categorie;
 import org.enchere.bo.Utilisateur;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

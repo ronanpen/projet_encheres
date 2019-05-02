@@ -8,6 +8,7 @@ import org.enchere.dal.DALException;
 import org.enchere.dal.DAOFactory;
 
 public class CategorieManager {
+	private static CategorieManager instance = null;
 	private CategorieDAO categorieDAO;
 
 	private CategorieManager() {
@@ -21,9 +22,16 @@ public class CategorieManager {
 		try {
 			listeCategorie = this.categorieDAO.selectAll();
 		} catch (DALException e) {
-			throw new BLLException("impossible de rÃ©cupÃ©rer la liste des catÃ©gories", e);
+			throw new BLLException("impossible de récupérer la liste des catégories", e);
 		}
 		return listeCategorie;
+	}
+	
+	public static synchronized CategorieManager getInstance() {
+		if(instance == null) {
+			instance = new CategorieManager();
+		}
+		return instance;
 	}
 
 }
