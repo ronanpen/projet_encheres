@@ -15,11 +15,8 @@
 <body>
 	<header> <%@include file="EnTete.jsp"%>
 	</header>
-
-<h1> Mon Profil</h1>
-<h2> Modification de mon profil</h2>
-
-<div class="container p-5 w-md-50">
+	
+	<div class="container p-5 w-md-50">
 			<form method="POST">
 				<div class="form-row">
 					<div class="form-group col-md-6">
