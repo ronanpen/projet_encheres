@@ -4,14 +4,22 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.Generated;
 
-@Data
 @Entity(name = "Encheres")
 public class Enchere {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "no_enchere")
+	private Integer idEnchere;
 	@ManyToOne
 	@JoinColumn(name="no_utilisateur")
 	@Column(name="no_utilisateur")
@@ -27,4 +35,13 @@ public class Enchere {
 	
 	@Column(name="montant_enchere")
 	private float montantEnchere;
+
+	public Enchere(Utilisateur utilisateur, ArticleVendu article, float montantEnchere) {
+		this.utilisateur = utilisateur;
+		this.article = article;
+		this.dateEnchere = LocalDateTime.now();
+		this.montantEnchere = montantEnchere;
+	}
+	
+	
 }
